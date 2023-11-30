@@ -21,7 +21,6 @@ body {
 
 .page-container {
     height: calc(100vh - 66px);
-    display: flex;
 }
 
 .text-principal {
@@ -109,6 +108,7 @@ body {
 @media screen and (max-width: 425px) {
     .hidden {
         display: none !important;
+        transition: 0.25s;
     }
 
     .sidebar {

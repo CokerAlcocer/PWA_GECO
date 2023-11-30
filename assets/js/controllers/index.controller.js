@@ -1,15 +1,27 @@
-app.controller('INDEX_CONTROLLER', ['$rootScope', ($rootScope) => {
-    $rootScope.rootConfig = {
-        user: {
-            name: localStorage.getItem('user'),
-            role: localStorage.getItem('role')
-        },
-        hotel: {
-            name: `GECO | ${localStorage.getItem('hotelName')}`,
-            colors: localStorage.getItem('hotelColors').split(',')
-        },
-        page: parseInt(localStorage.getItem('page')),
-        settings: false
+app.controller('INDEX_CONTROLLER', ['$rootScope', '$http', ($rootScope, $http) => {
+    const CONST_URL = 'http://localhost:8080';
+    (() => {
+        let token = localStorage.getItem('token');
+        if (!token) {
+            window.location.replace('../../../view/errors/403.html');
+        }
+    })();
+
+    let isSideShowing = false;
+    $rootScope.loader = true;
+    $rootScope.rootConfig = {}
+    $rootScope.styles = {}
+
+    $rootScope.loadPage = async () => {
+        await fetch('http://localhost:8080/hotel/getHotel/2', {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem('token')
+            }
+        }).then(res => {
+            console.log(res);
+        })
     }
 
     $rootScope.changeView = page => {
@@ -32,18 +44,6 @@ app.controller('INDEX_CONTROLLER', ['$rootScope', ($rootScope) => {
         element.style.backgroundColor = $rootScope.rootConfig.hotel.colors[0];
     }
 
-    $rootScope.styles = {
-        active: {
-            'background-color': $rootScope.rootConfig.hotel.colors[0],
-            'color': '#FFF',
-            'transition': '0.25s'
-        },
-        inactive: {
-            'color': $rootScope.rootConfig.hotel.colors[1],
-            'transition': '0.25s'
-        }
-    }
-
     $rootScope.loadSidebarItem = page => page === $rootScope.rootConfig.page ? $rootScope.styles.active : $rootScope.styles.inactive;
 
     $rootScope.showSiteSettings = flag => {
@@ -56,7 +56,6 @@ app.controller('INDEX_CONTROLLER', ['$rootScope', ($rootScope) => {
 
     $rootScope.loadSettings = () => $rootScope.rootConfig.settings ? $rootScope.styles.active : $rootScope.styles.inactive;
 
-    let isSideShowing = false;
     $rootScope.showSideBar = () => {
         if(!isSideShowing) {
             document.getElementById('sidebar').classList.remove('hidden');
