@@ -28,13 +28,13 @@
                             <form class="mt-4" name="loginForm">
                                 <div class="row g-4">
                                     <div class="col-12 form-group overlay">
-                                        <input type="text" id="user" name="user" ng-model="user.name" pattern="^[A-Z]*$" ng-trim="false" required class="geco-input" autocomplete="off"> 
+                                        <input type="text" id="user" name="user" ng-model="user.name" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" ng-trim="false" required class="geco-input" autocomplete="off"> 
                                         <label for="">Usuario o correo electrónico</label>
                                         <span ng-if="loginForm.user.$touched && (loginForm.user.$error.required) && !loginForm.user.$error.pattern" class="error-info">Este campo es obligatorio</span>
                                         <span ng-if="loginForm.user.$error.pattern" class="error-info">Este campo solo acepta</span>
                                     </div>
                                     <div class="col-12 form-group overlay">
-                                        <input type="password" id="password" name="password" ng-model="user.password" pattern="^[A-Za-z]*$" required class="geco-input" autocomplete="off">
+                                        <input type="password" id="password" name="password" ng-model="user.password"  required class="geco-input" autocomplete="off" minlength="3">
                                         <label for="">Contraseña</label>
                                         <span ng-if="loginForm.password.$touched && (loginForm.password.$error.required) && !loginForm.password.$error.pattern" class="error-info">Este campo es obligatorio</span>
                                         <span ng-if="loginForm.password.$error.pattern" class="error-info">Este campo solo acepta</span>

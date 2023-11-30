@@ -8,7 +8,7 @@ app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
     $scope.user = {
         role: 'Gerente',
         hotel: {
-            name: 'Hoteles Super Mario Bros con un nombre super largo para ve el responsive',
+            name: 'Labored',
             colors: [
                 '#212529', '#59367d', '#6FFD73'
             ]
