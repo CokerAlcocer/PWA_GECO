@@ -1,0 +1,124 @@
+
+<div ng-controller="ofertServiciosController">
+    <div class="row">
+        <div class="col-8 col-lg-8">
+            <h3 class="fw-normal" id="xd">Servicios ofrecidos</h3>
+        </div>
+        <div class="col-lg-4 col-4 d-flex justify-content-end">
+            <button type="button" class="btn btn-outline-success" ng-click="registrarServicio()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Registrar nuevo servicio">
+                <i class="bi bi-bookmark-plus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col-lg-4" ng-repeat="oferta in ofertas">
+            <div class="card my-3 border-0 shadow">
+                <div class="card-header ">
+                    <div class="row">
+                        <div class="col-lg-1">
+                            <i class="bi bi-person-badge-fill"></i>
+                        </div>
+                        <div class="col-lg-8 d-flex justify-content-center">
+                            <p class=" fw-bolder  ms-1" ng-bind="oferta.name"></p>
+                        </div>
+                        <div class="col-lg-3 d-flex align-items-center justify-content-end ">
+                            <span class="badge text-bg-success" ng-if="oferta.status=='Verificado'">Verificado</span>
+                            <span class="badge text-bg-warning" ng-if="oferta.status=='Por verificar'">Por verificar</span>
+                            <span class="badge text-bg-secondary" ng-if="oferta.status=='Sin verificar'">Sin verificar</span>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="card-body p-2 rounded-corner">
+                    <div class="row">
+                        <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center">
+                              <img src="{{oferta.img}}" alt="XD" class="img-fluid rounded">
+                        </div>
+                        <div class="col-12 col-lg-8">
+                            <div class="row ">
+                                <div class="col-lg-12 col-12 d-flex align-content-between">
+                                    <h3 class="fw-bold fs-5">Slogan:</h3>
+                                    <p ng-bind="oferta.slogan" class=" fs-6 ms-2"></p>      
+                                </div>
+                                 <div class="col-lg-12 col-12 d-flex align-items-center">
+                                    <h3 class="fw-bold fs-5">Precio base:</h3>
+                                    <p class="fw-semibold fs-4 ms-3 " ng-bind="oferta.price"></p>    
+                                 </div>
+                                 <div class="col-lg-12 col-12 d-flex align-items-center">
+                                    <h3 class="fw-bold fs-5">Descripción:</h3>
+                                    <p class="fw-normal fs-6 ms-3 " ng-bind="oferta.description"></p>    
+                                 </div>   
+                            </div>
+                            
+                        </div>
+                        <div class="col-lg-12 col-12 mt-3 text-center">
+                            <label class="form-control fw-semibold fs-4">Valoración del servicio</label>
+                            <div class="progress" role="progressbar" aria-label="Warning example" aria-valuenow="{{oferta.rating}}" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar progress-bar-striped bg-success text-white" ng-bind="oferta.rating" style="width:{{oferta.rating}}%" ></div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-end ">
+                    <button type="button" class="btn btn-outline-danger ms-2" ng-click="adicionInfo(oferta)">Dejar de ofrecer</button>
+                    <button type="button" class="btn btn-outline-primary ms-2" ng-click="adicionInfo(oferta)">Editar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- #Modales -->
+    <div class="modal fade" id="offerDetails" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="modal-title fw-bold fs-4 ">Registro de servicio</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12 col-12">
+                            <label class="fw-semibold form-label">Nombre: </label>
+                            <textarea class="form-control border border-secondary"></textarea>
+                        </div>
+                        <div class="col-lg-12 col-12">
+                            <label class="fw-semibold form-label">Slogan: </label>
+                            <textarea class="form-control border border-secondary"></textarea>
+                        </div>
+                        <div class="col-lg-4 col-4">
+                            <label class="fw-semibold form-label">Precio: </label>
+                            <input type="text" class="form-control border border-secondary" >
+                        </div>
+                        <div class="col-lg-8 col-8 text-center">
+                            <label class="fw-semibold form-label">Horario: </label>
+                            <div class="row">
+                                <div class="col-6 col-lg-6">
+                                    <input type="time" class="form-control border border-secondary" >
+                                </div>
+                                <div class="col-6 col-lg-6">
+                                    <input type="time" class="form-control border border-secondary" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-12">
+                            <label class="fw-semibold form-label">Descripción: </label>
+                            <textarea class="form-control border border-secondary"></textarea>
+                        </div>
+                        <div class="col-lg-12 col-12">
+                            <label class="fw-semibold form-label">Telefono de contacto: </label>
+                            <input type="text" class="form-control border border-secondary"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-12  d-flex justify-content-end">
+                        <button class="btn btn-outline-secondary mt-3 py-2 me-2" type="button" data-bs-dismiss="modal">Cerrar</button>
+                        <button class="btn btn-outline-success mt-3 py-2" type="button" >Guardar</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>   
+

@@ -2,9 +2,9 @@
 <html lang="en" ng-app="GECO_PWA">
 <head>
     <span ng-include src="'../template/headers.html'"></span>
-    <title>GECO | Centro de control</title>
+    <title>LaboRed |</title>
 </head>
-<body ng-controller="INDEX_CONTROLLER">
+<body ng-controller="INDEX_CONTROLLER" >
     <!-- # Barra de navegación superior -->
     <span ng-include onload="loadUpperbar()" src="'../template/upperbar.html'"></span>
     <!-- # Barra de navegación superior -->
@@ -16,10 +16,10 @@
         <!-- # Sidebar -->
         <!-- # Contenido -->
         <div class="content-page p-3 py-3">
-            <span ng-if="rootConfig.page === 0 && rootConfig.user.role === 'Gerente'" ng-include src="'./dashboard.html'"></span>
-            <span ng-if="rootConfig.page === 1 && rootConfig.user.role === 'Gerente'" ng-include src="'./bedrooms.html'"></span>
-            <span ng-if="rootConfig.page === 2 && rootConfig.user.role === 'Gerente'" ng-include src="'./users.html'"></span>
-            <span ng-if="rootConfig.page === 3 && rootConfig.user.role === 'Gerente'" ng-include src="'./review-items.html'"></span>
+            <span ng-if="rootConfig.page === 0 && rootConfig.user.role === 'Cliente'" ng-include src="'./listServices.html'"></span>
+            <span ng-if="rootConfig.page === 1 && rootConfig.user.role === 'Cliente'" ng-include src="'./myServices.html'"></span>
+            <span ng-if="rootConfig.page === 0 && rootConfig.user.role === 'Proveedor'" ng-include src="'../proveedor/servicios.html'"></span>
+            <span ng-if="rootConfig.page === 1 && rootConfig.user.role === 'Proveedor'" ng-include src="'./review-items.html'"></span>
             <span></span>
         </div>
         <!-- # Contenido -->
@@ -68,5 +68,7 @@
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/controllers/index.controller.js"></script>
     <script src="../../assets/js/controllers/oferta.controller.js"></script>
+    <script src="../../assets/js/controllers/userServices.controller.js"></script>
+    <script src="../../assets/js/controllers/provider/servicios_ofertados.controller.js"></script>
 </body>
 </html>

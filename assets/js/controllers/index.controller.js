@@ -5,7 +5,7 @@ app.controller('INDEX_CONTROLLER', ['$rootScope', ($rootScope) => {
             role: localStorage.getItem('role')
         },
         hotel: {
-            name: `GECO | ${localStorage.getItem('hotelName')}`,
+            name: `LaboRed | ${localStorage.getItem('hotelName')}`,
             colors: localStorage.getItem('hotelColors').split(',')
         },
         page: parseInt(localStorage.getItem('page')),
@@ -26,7 +26,11 @@ app.controller('INDEX_CONTROLLER', ['$rootScope', ($rootScope) => {
                 $rootScope.rootConfig.page = 0;
         }
     }
-    
+
+    $rootScope.signup = () => {
+        window.location.replace('../../../view/login.html');
+    }
+
     $rootScope.loadUpperbar = () => {
         const element = document.getElementById('upperbar');
         element.style.backgroundColor = $rootScope.rootConfig.hotel.colors[0];
@@ -68,5 +72,6 @@ app.controller('INDEX_CONTROLLER', ['$rootScope', ($rootScope) => {
 
         isSideShowing = !isSideShowing;
     }
+
 
 }]);

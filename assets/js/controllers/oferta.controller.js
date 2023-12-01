@@ -14,7 +14,9 @@ $scope.ofertas = [
         slogan: 'La energía en tus manos',
         description: 'Contactame para acordar precios y fechas.',
         offerPhone: '+527776542313',
-        rating: 55
+        rating: 55,
+        schedule: '09:00 am - 03:00 pm'
+
     },
     {
         id:2,
@@ -26,7 +28,8 @@ $scope.ofertas = [
         slogan: 'El rendimiento a tu alcanze',
         description: 'Contactame para conocer tus necesidades y brindarte los precios a tu medida.',
         offerPhone: '+52777098765',
-        rating: 80
+        rating: 80,
+        schedule: '10:00 am - 04:30 pm'
     },
     {
         id:3,
@@ -38,7 +41,8 @@ $scope.ofertas = [
         slogan: 'Calidad y claridad al contacto.',
         description: 'Contactame para ofrecerte los mejores precios acorde al tamaño de tu piscina.',
         offerPhone: '+527776541235',
-        rating: 75
+        rating: 75,
+        schedule: '08:00 am - 03:30 pm'
     },
     {
         id:4,
@@ -50,7 +54,8 @@ $scope.ofertas = [
         slogan: 'Calidad y claridad al contacto.',
         description: 'Contactame para ofrecerte los mejores precios acorde al tamaño de tu piscina.',
         offerPhone: '+527776234556',
-        rating: 90
+        rating: 90,
+        schedule: '11:00 am - 05:00 pm'
     }
 ];
 
