@@ -60,8 +60,8 @@
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-end ">
-                    <button type="button" class="btn btn-outline-danger ms-2" ng-click="adicionInfo(oferta)">Dejar de ofrecer</button>
-                    <button type="button" class="btn btn-outline-primary ms-2" ng-click="adicionInfo(oferta)">Editar</button>
+                    <button type="button" class="btn btn-outline-danger ms-2" ng-click="darBajaInfo(oferta)">Dejar de ofrecer</button>
+                    <button type="button" class="btn btn-outline-primary ms-2" ng-click="editarInfo(oferta)">Editar</button>
                 </div>
             </div>
         </div>
@@ -109,12 +109,80 @@
                             <label class="fw-semibold form-label">Telefono de contacto: </label>
                             <input type="text" class="form-control border border-secondary"/>
                         </div>
+                        <div class="col-lg-12 col-12 text-center mt-3">
+                                <div class="btn btn-outline-primary">
+                                    <label class="form-label  " for="customFile">Elegir imagen</label>
+                                    <input type="file" class="form-control d-none" id="customFile" ng-model="customFile"  />
+                                </div>
+                                <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
+                                alt="example placeholder" class="img-fluid rounded" style="width: 250px;" />
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <div class="col-12  d-flex justify-content-end">
                         <button class="btn btn-outline-secondary mt-3 py-2 me-2" type="button" data-bs-dismiss="modal">Cerrar</button>
-                        <button class="btn btn-outline-success mt-3 py-2" type="button" >Guardar</button>
+                        <button class="btn btn-outline-success mt-3 py-2" type="button" ng-click="guardar()">Guardar</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="offerEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="modal-title fw-bold fs-4 ">Registro de servicio</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12 col-12">
+                            <label class="fw-semibold form-label">Nombre: </label>
+                            <textarea class="form-control border border-secondary" ng-model="eOferta.name" ng-bind="eOferta.name ? eOferta.name : ''"></textarea>
+                        </div>
+                        <div class="col-lg-12 col-12">
+                            <label class="fw-semibold form-label">Slogan: </label>
+                            <textarea class="form-control border border-secondary" ng-model="eOferta.slogan" ng-bind="eOferta.slogan ? eOferta.slogan :'' "></textarea>
+                        </div>
+                        <div class="col-lg-4 col-4">
+                            <label class="fw-semibold form-label">Precio: </label>
+                            <input type="text" class="form-control border border-secondary" ng-model="eOferta.price" ng-bind="eOferta.price ? eOferta.price : ''">
+                        </div>
+                        <div class="col-lg-8 col-8 text-center">
+                            <label class="fw-semibold form-label">Horario: </label>
+                            <div class="row">
+                                <div class="col-6 col-lg-6">
+                                    <input type="time" class="form-control border border-secondary" ng-model="eOferta.hStart" ng-bind="eOferta.hStart ? eOferta.hStart : ''">
+                                </div>
+                                <div class="col-6 col-lg-6">
+                                    <input type="time" class="form-control border border-secondary" ng-model="eOferta.hEnd" ng-bind="eOferta.hEnd ? eOferta.hEnd : '' ">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-12">
+                            <label class="fw-semibold form-label">Descripción: </label>
+                            <textarea class="form-control border border-secondary" ng-model="eOferta.description" ng-bind="eOferta.description"></textarea>
+                        </div>
+                        <div class="col-lg-12 col-12">
+                            <label class="fw-semibold form-label">Telefono de contacto: </label>
+                            <input type="text" class="form-control border border-secondary" ng-model="eOferta.offerPhone" ng-bind="eOferta.offerPhone"/>
+                        </div>
+                        <div class="col-lg-12 col-12 text-center mt-3">
+                                <div class="btn btn-outline-primary">
+                                    <label class="form-label  " for="customFile1">Elegir imagen</label>
+                                    <input type="file" class="form-control d-none" id="customFile1" ng-model="customFile"  />
+                                </div>
+                                <img id="selectedImage1" src="{{eOferta.img ? eOferta.img : 'https://mdbootstrap.com/img/Photos/Others/placeholder.jpg'}}"
+                                alt="example placeholder" class=" rounded" style="width: 250px; height: 200px; !important" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-12  d-flex justify-content-end">
+                        <button class="btn btn-outline-secondary mt-3 py-2 me-2" type="button" data-bs-dismiss="modal">Cerrar</button>
+                        <button class="btn btn-outline-success mt-3 py-2" type="button" ng-click="editar()" >Modificar</button>
                 </div>
                 </div>
             </div>

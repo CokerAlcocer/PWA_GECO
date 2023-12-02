@@ -8,10 +8,11 @@ app.controller('INDEX_CONTROLLER', ['$rootScope', ($rootScope) => {
             name: `LaboRed | ${localStorage.getItem('hotelName')}`,
             colors: localStorage.getItem('hotelColors').split(',')
         },
+        infUser: JSON.parse(localStorage.getItem('infUser')),
         page: parseInt(localStorage.getItem('page')),
         settings: false
     }
-
+console.log($rootScope.rootConfig.infUser)
     $rootScope.changeView = page => {
         switch(page) {
             case 0:

@@ -24,6 +24,18 @@ app.controller('userServiceController', ['$scope', '$http', ($scope, $http) => {
         },
     ];
     
-
+$scope.valorar = () =>{
+    Toastify({
+        text: "Valoración guardada",
+        gravity: "top",
+        position: 'right',
+        duration: 1700,
+        className: 'success',
+        close: true,
+        style: {
+          background: "linear-gradient(to right, #44C862, #6EFF8F)",
+        }
+      }).showToast();
+}
     
     }]);

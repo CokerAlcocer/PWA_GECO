@@ -1,0 +1,76 @@
+
+<div ng-controller="profileController" style="overflow-y: scroll !important; ">
+    <div class="row">
+        <div class="col-lg-12 col-12">
+            <h3 class="fw-normal" id="xd">Sergio Cortes Popoca</h3>
+        </div>
+    </div>
+    
+<!-- # Contenido App WEB / Responsive -->
+<div class="mt-0 my-5">
+    <div class="row g-4 mb-5">
+            <h1 class="fs-3 fw-bold text-center">Información del usuario</h1>
+            <hr class="border border-dark">
+            <div class="col-12 col-lg-2 text-center">
+                <i class="bi bi-person-circle" style="font-size: 6em;color: grey;"></i>
+            </div>
+            <div class="col-12  col-lg-3">
+                <label class="form-label fw-semibold fs-5">Nombre</label>
+                <input type="text" class="form-control border border-secondary" placeholder="Nombre" ng-model="infoUser.name">
+            </div>
+            <div class="col-12  col-lg-3 p-0">
+                <label class="form-label fw-semibold fs-5">Apellido paterno</label>
+                <input type="text" class="form-control border border-secondary" placeholder="Apellido paterno" ng-model="infoUser.surname">
+            </div>
+            <div class="col-12  col-lg-3">
+                <label class="form-label fw-semibold fs-5">Apellido materno</label>
+                <input type="text" class="form-control border border-secondary" placeholder="Apellido materno" ng-model="infoUser.lastname">
+            </div>
+            <div class="col-12  col-lg-4">
+                <label class="form-label fw-semibold fs-5">Correo</label>
+                <input type="text" class="form-control border border-secondary" placeholder="Correo" ng-model="infoUser.email">
+            </div>
+            <div class="col-12  col-lg-4">
+                <label class="form-label fw-semibold fs-5">Fecha Nacimiento</label>
+                <input type="date" class="form-control border border-secondary"  ng-model="infoUser.birthdate">
+            </div>
+            <div class="col-12  col-lg-4 mt-4  ">
+                <br>
+                <button class="btn btn-outline-success btn-lg" ng-click="modinfo('Usuario')">Actualizar</button>
+            </div>
+            <h1 class="fs-3 fw-bold text-center">Información del contacto</h1>
+            <hr class="border border-dark">
+            <div class="col-12  col-lg-6">
+                <label class="form-label fw-semibold fs-5">Dirección</label>
+                <textarea  class="form-control border border-secondary" placeholder="Dirección" ng-model="infoUser.address"></textarea>
+            </div>
+            <div class="col-12  col-lg-6">
+                <label class="form-label fw-semibold fs-5">Referencias</label>
+                <textarea  class="form-control border border-secondary" placeholder="Referencias" ng-model="infoUser.references"></textarea>
+            </div>
+            <div class="col-12  col-lg-4">
+                <label class="form-label fw-semibold fs-5">Telefono</label>
+                <input type="text" class="form-control border border-secondary" placeholder="Telefono" ng-model="infoUser.phone">
+            </div>
+            <div class="col-12  col-lg-4 mt-4  ">
+                <br>
+                <button class="btn btn-outline-success btn-lg" ng-click="modinfo('Contacto')">Actualizar</button>
+            </div>
+            <hr class="border border-dark">
+            <div class="col-12  col-lg-4">
+                <label class="form-label fw-semibold fs-5">Contraseña anterior</label>
+                <input type="text" class="form-control border border-secondary" placeholder="Contraseña">
+            </div>
+            <div class="col-12  col-lg-4">
+                <label class="form-label fw-semibold fs-5">Nueva contraseña</label>
+                <input type="text" class="form-control border border-secondary" placeholder="Contraseña">
+            </div>
+            <div class="col-12  col-lg-4 mt-4 ">
+                <br>
+                <button class="btn btn-outline-success btn-lg" ng-click="modinfo('Contra')">Cambiar contraseña</button>
+            </div>
+    </div>
+</div>
+<!-- # Contenido App WEB / Responsive -->
+<div class="my-5 hid-web text-white">.</div>
+</div>

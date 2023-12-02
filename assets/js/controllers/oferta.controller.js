@@ -7,7 +7,7 @@ $scope.ofertas = [
     {
         id:1,
         offer: 'Sergio Cortes Popoca',
-        status: 'Verificado',
+        status: 'Atendido',
         name: 'Instalacion paneles solares',
         img: '../../../assets/images/thingjpg.jpg',
         price: '$300',
@@ -21,7 +21,6 @@ $scope.ofertas = [
     {
         id:2,
         offer: 'Sergio Cortes Popoca',
-        status: 'Por verificar',
         name: 'Manteniento de equipo de computo',
         img: '../../../assets/images/thingjpg.jpg',
         price: '$400',
@@ -66,4 +65,45 @@ $scope.adicionInfo = (oferta) =>{
     $('#offerDetails').modal('show');
 }
 
+$scope.contratar = () =>{
+    $('#offerDetails').modal('hide');
+    $('#offerContract').modal('show');
+}
+
+
+$scope.regContrato = () =>{
+    Swal.fire({
+            title: "Contratación del servicio",
+            text: `¿Seguro de solicitarlo?`,
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonText: "Aceptar",
+            cancelButtonText: "Cancelar"
+        }).then(res => {
+            //0883C1  5CC8FF
+            if(res.isConfirmed){
+                Toastify({
+                    text: "Contratado",
+                    gravity: "top",
+                    position: 'right',
+                    duration: 1700,
+                    className: 'success',
+                    close: true,
+                    style: {
+                      background: "linear-gradient(to right, #44C862, #6EFF8F)",
+                    }
+                  }).showToast();
+            }else{
+                Toastify({
+                    text: "Piensalo más adelante",
+                    gravity: "bottom",
+                    position: 'left',
+                    close: true,
+                    style: {
+                      background: "linear-gradient(to right, #C8770F, #FFB250)",
+                    }
+                  }).showToast();
+            }
+        })
+}
 }]);

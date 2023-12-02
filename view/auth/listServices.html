@@ -76,7 +76,44 @@
                         </div>
                         <div class="col-12  d-flex justify-content-end">
                                 <button class="btn btn-outline-secondary mt-3 py-2 me-2" type="button" data-bs-dismiss="modal">Cerrar</button>
-                                <button class="btn btn-outline-success mt-3 py-2" type="button" >Contratar</button>
+                                <button class="btn btn-outline-success mt-3 py-2" type="button" ng-click="contratar()">Contratar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="offerContract" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="d-flex flex-row align-items-center justify-content-evenly">
+                        <span class="fs-3">Brindador: </span>
+                        <span class="fs-6 ms-2 fw-lighter" ng-bind="ofertaSel.offer"></span>
+                        <span class="badge rounded-pill " ng-class="{'text-bg-success': ofertaSel.status == 'Verificado',
+                        'text-bg-warning': ofertaSel.status =='Por verificar',
+                        'text-bg-secondary': ofertaSel.status =='Sin verificar'}"
+                        ng-bind="ofertaSel.status"></span>
+                    </div>
+                    <hr class="mb-2">
+                    <div class="row">
+                        <div class="col-12 col-lg-12">
+                            <p class=" fw-bolder fs-4 text-center" ng-bind="ofertaSel.name"></p>
+                        </div>
+                        <div class="col-12 col-lg-12 mt-3 text-center">
+                            <h3 class="fs-4">Descripción: </h3>
+                            <textarea class="form-control border border-secondary" ng-model="ofertaSel.descriptionUs"></textarea>
+                        </div>
+                        <div class="col-12 col-lg-12 mt-3 text-center">
+                            <h3 class="fs-4">Horario: </h3>
+                            <input type="time" class="form-control border border-secondary" ng-model="ofertaSel.schedule" ">
+                        </div>
+                       
+                        <div class="col-12  d-flex justify-content-end">
+                                <button class="btn btn-outline-secondary mt-3 py-2 me-2" type="button" data-bs-dismiss="modal">Cerrar</button>
+                                <button class="btn btn-outline-success mt-3 py-2" type="button" ng-click="regContrato()">Aceptar</button>
                             
                             
                         </div>

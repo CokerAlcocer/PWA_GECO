@@ -18,50 +18,20 @@
         <div class="content-page p-3 py-3">
             <span ng-if="rootConfig.page === 0 && rootConfig.user.role === 'Cliente'" ng-include src="'./listServices.html'"></span>
             <span ng-if="rootConfig.page === 1 && rootConfig.user.role === 'Cliente'" ng-include src="'./myServices.html'"></span>
+            <span ng-if="rootConfig.page === 2 && rootConfig.user.role === 'Cliente'" ng-include src="'./profile.html'"></span>
             <span ng-if="rootConfig.page === 0 && rootConfig.user.role === 'Proveedor'" ng-include src="'../proveedor/servicios.html'"></span>
-            <span ng-if="rootConfig.page === 1 && rootConfig.user.role === 'Proveedor'" ng-include src="'./review-items.html'"></span>
+            <span ng-if="rootConfig.page === 1 && rootConfig.user.role === 'Proveedor'" ng-include src="'../proveedor/solicitados.html'"></span>
+            <span ng-if="rootConfig.page === 2 && rootConfig.user.role === 'Proveedor'" ng-include src="'./profile.html'"></span>
             <span></span>
         </div>
         <!-- # Contenido -->
 
-        <!-- # Modal de configuración del sitio -->
-        <div class="modal fade" id="siteSettings" data-bs-backdrop="static" data-bs-keyboard="false"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <h3 class="fw-normal">Configuración del sitio</h3>
-                        <hr class="mb-4">
-                        <form name="formConfig" class="mt-4">
-                            <div class="row g-3">
-                                <div class="col-12 form-group overlay">
-                                    <input type="text" id="hotelName" name="hotelName" ng-model="rootConfig.hotel.name" pattern="^[A-Za-z\s]*$" ng-trim="false" required class="geco-input" autocomplete="off">
-                                    <label for="">Nombre del hotel</label>
-                                    <span ng-if="formConfig.hotelName.$touched && (formConfig.hotelName.$error.required) && !formConfig.hotelName.$error.pattern" class="error-info">Este campo es obligatorio</span>
-                                    <span ng-if="formConfig.hotelName.$error.pattern" class="error-info">Este campo solo acepta</span>
-                                </div>
-                                <div class="col-6 form-group overlay">
-                                    <input type="color" ng-model="rootConfig.hotel.colors[0]" ng-value="rootConfig.hotel.colors[0]"  id="color1" name="color1" class="geco-input color">
-                                    <label for="">Color principal</label>
-                                </div>
-                                <div class="col-6 form-group overlay">
-                                    <input type="color" ng-model="rootConfig.hotel.colors[1]" ng-value="rootConfig.hotel.colors[1]"  id="color2" name="color2" class="geco-input color">
-                                    <label for="">Color secundario</label>
-                                </div>
-                                <div class="col-12 text-end">
-                                    <button class="btn btn-outline-secondary mt-3 py-2 hidden" type="button" data-bs-dismiss="modal" ng-click="showSiteSettings(true)">Cerrar</button>
-                                    <button class="btn btn-outline-secondary mt-3 py-2 hid-web" type="button" data-bs-dismiss="modal" ng-click="showSiteSettings(false)">Cerrar</button>
-                                    <button ng-if="formConfig.$invalid" type="button" class="btn btn-primary mt-3 py-2" disabled>Guardar</button>
-                                    <button ng-if="formConfig.$valid" type="submit" class="btn btn-primary mt-3 py-2">Guardar</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <!-- # Modal de configuración del sitio -->
     </div>
     <!-- # Contenido de la página -->
+    <script src="../../assets/js/sweetalert2.all.min.js"></script>
+    <script src="../../assets/js/toastify-js.js"></script>
     <script src="../../assets/js/jquery-3.7.1.min.js"></script>
     <script src="../../assets/js/angular.min.js"></script>
     <script src="../../assets/js/app.js"></script>
@@ -70,5 +40,7 @@
     <script src="../../assets/js/controllers/oferta.controller.js"></script>
     <script src="../../assets/js/controllers/userServices.controller.js"></script>
     <script src="../../assets/js/controllers/provider/servicios_ofertados.controller.js"></script>
+    <script src="../../assets/js/controllers/provider/servicios_solicitados.controller.js"></script>
+    <script src="../../assets/js/controllers/profile.controller.js"></script>
 </body>
 </html>

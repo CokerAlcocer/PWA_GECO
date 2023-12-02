@@ -1,0 +1,63 @@
+
+<div ng-controller="ofertSolicitadosController">
+    <div class="row">
+        <div class="col-8 col-lg-8">
+            <h3 class="fw-normal" id="xd">Servicios solicitados</h3>
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col-lg-4" ng-repeat="oferta in solicitados">
+            <div class="card my-3 border-0 shadow">
+                <div class="card-header ">
+                    <div class="row">
+                        <div class="col-lg-1">
+                            <i class="bi bi-person-badge-fill"></i>
+                        </div>
+                        <div class="col-lg-8 d-flex justify-content-center">
+                            <p class=" fw-bolder  ms-1" ng-bind="oferta.client"></p>
+                        </div>
+                        <div class="col-lg-3 d-flex align-items-center justify-content-end ">
+                            <span class="badge" ng-class="{'text-bg-success' : oferta.status=='Atendido',
+                        'text-bg-warning': oferta.status=='Por atender',
+                    'text-bg-secondary': oferta.status=='Cancelada'}" ng-bind="oferta.status"></span>
+                    </div>
+                    
+                </div>
+                <div class="card-body p-2 rounded-corner">
+                    <div class="row">
+                                <div class="col-lg-12 col-12 d-flex justify-content-center">
+                                    <h3 class="fw-bold fs-5" ng-bind="oferta.service"></h3>
+                                </div>
+                                 <div class="col-lg-12 col-12 d-flex align-items-center">
+                                    <h3 class="fw-semibold fs-6">Descripción:</h3>
+                                    <p class="fw-normal fs-6 ms-3 " ng-bind="oferta.description"></p>    
+                                 </div>
+                                 <div class="col-lg-6 col-12 d-flex align-items-center">
+                                    <h3 class="fw-semibold fs-6">Contacto:</h3>
+                                    <p class="fw-normal fs-6 ms-3 " ng-bind="oferta.contactPhone"></p>    
+                                 </div>
+                                 <div class="col-lg-6 col-12 d-flex align-items-center">
+                                    <h3 class="fw-semibold fs-6">Horario:</h3>
+                                    <p class="fw-normal fs-6 ms-3 " ng-bind="oferta.schedule"></p>    
+                                 </div>
+                                 <div class="col-lg-12 col-12 d-flex align-items-center">
+                                    <h3 class="fw-semibold fs-6">Dirección:</h3>
+                                    <p class="fw-normal fs-6 ms-3 " ng-bind="oferta.address"></p>    
+                                 </div>
+                                 <div class="col-lg-12 col-12 d-flex align-items-center">
+                                    <h3 class="fw-semibold fs-6">Referencias:</h3>
+                                    <p class="fw-normal fs-6 ms-3 " ng-bind="oferta.references"></p>    
+                                 </div>  
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-end " ng-if="oferta.status == 'Por atender'">
+                    <button type="button" class="btn btn-outline-success ms-2" ng-click="completar()">Completar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+</div>   
+
