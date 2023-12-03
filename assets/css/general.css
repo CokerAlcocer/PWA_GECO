@@ -12,7 +12,7 @@ body {
 }
 
 .upperbar {
-    background-color: #326A6D;
+    background-color: #000;
     padding: 8px 15px 8px 15px;
     display: flex;
     flex-direction: row;

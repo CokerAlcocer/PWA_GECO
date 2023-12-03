@@ -11,7 +11,7 @@
                 <div class="card-header ">
                     <div class="row">
                         <div class="col-lg-1">
-                            <i class="bi bi-person-badge-fill"></i>
+                            <i class="bi bi-person-badge-fill" style="font-size: 2rem;"></i>
                         </div>
                         <div class="col-lg-8 d-flex justify-content-center">
                             <p class=" fw-bolder  ms-1" ng-bind="oferta.client"></p>
@@ -51,13 +51,11 @@
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-end " ng-if="oferta.status == 'Por atender'">
-                    <button type="button" class="btn btn-outline-success ms-2" ng-click="completar()">Completar</button>
+                    <button type="button" class="btn btn-outline-success ms-2" ng-click="completar(oferta)">Completar</button>
                 </div>
             </div>
         </div>
     </div>
-
-
     
 </div>   
 

@@ -84,9 +84,7 @@ $scope.user1 = {
         
     }
 
-    const register = () => {
-        
-    }
+  
 
     $scope.switchOperation = () => $scope.form ? login() : register();
 }]);

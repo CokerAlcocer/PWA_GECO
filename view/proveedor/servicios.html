@@ -1,5 +1,5 @@
 
-<div ng-controller="ofertServiciosController">
+<div ng-controller="ofertServiciosController" ng-init="fillOfertas()">
     <div class="row">
         <div class="col-8 col-lg-8">
             <h3 class="fw-normal" id="xd">Servicios ofrecidos</h3>
@@ -15,16 +15,15 @@
             <div class="card my-3 border-0 shadow">
                 <div class="card-header ">
                     <div class="row">
-                        <div class="col-lg-1">
-                            <i class="bi bi-person-badge-fill"></i>
+                        <div class="col-lg-1 col-1 col-md-1 d-flex justify-content-center align-items-center">
+                            <i class="bi bi-person-badge-fill" style="font-size: 2em;"></i>
                         </div>
-                        <div class="col-lg-8 d-flex justify-content-center">
+                        <div class="col-lg-8 col-8 col-md-8 d-flex justify-content-center align-items-center ">
                             <p class=" fw-bolder  ms-1" ng-bind="oferta.name"></p>
                         </div>
-                        <div class="col-lg-3 d-flex align-items-center justify-content-end ">
-                            <span class="badge text-bg-success" ng-if="oferta.status=='Verificado'">Verificado</span>
-                            <span class="badge text-bg-warning" ng-if="oferta.status=='Por verificar'">Por verificar</span>
-                            <span class="badge text-bg-secondary" ng-if="oferta.status=='Sin verificar'">Sin verificar</span>
+                        <div class="col-lg-3 col-3 col-md-3 d-flex justify-content-center align-items-center ">
+                            <span class="badge" ng-class="{'text-bg-success':oferta.status == 'Activo' ,
+                            'text-bg-secondary':oferta.status == 'Inactivo' }" ng-bind="oferta.status"></span>
                         </div>
                     </div>
                     
@@ -60,7 +59,8 @@
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-end ">
-                    <button type="button" class="btn btn-outline-danger ms-2" ng-click="darBajaInfo(oferta)">Dejar de ofrecer</button>
+                    <button type="button" class="btn ms-2" ng-class="{'btn-outline-danger': oferta.status == 'Activo',
+                    'btn-outline-success': oferta.status == 'Inactivo'}" ng-click="camStatus(oferta)">{{oferta.status == 'Activo' ? 'Dejar de ofrece' : 'Ofrecer'}}</button>
                     <button type="button" class="btn btn-outline-primary ms-2" ng-click="editarInfo(oferta)">Editar</button>
                 </div>
             </div>
@@ -80,39 +80,39 @@
                     <div class="row">
                         <div class="col-lg-12 col-12">
                             <label class="fw-semibold form-label">Nombre: </label>
-                            <textarea class="form-control border border-secondary"></textarea>
+                            <textarea class="form-control border border-secondary" ng-model="rOfer.name"></textarea>
                         </div>
                         <div class="col-lg-12 col-12">
                             <label class="fw-semibold form-label">Slogan: </label>
-                            <textarea class="form-control border border-secondary"></textarea>
+                            <textarea class="form-control border border-secondary" ng-model="rOfer.slogan"></textarea>
                         </div>
                         <div class="col-lg-4 col-4">
                             <label class="fw-semibold form-label">Precio: </label>
-                            <input type="text" class="form-control border border-secondary" >
+                            <input type="text" class="form-control border border-secondary" ng-model="rOfer.price">
                         </div>
                         <div class="col-lg-8 col-8 text-center">
                             <label class="fw-semibold form-label">Horario: </label>
                             <div class="row">
                                 <div class="col-6 col-lg-6">
-                                    <input type="time" class="form-control border border-secondary" >
+                                    <input type="time" class="form-control border border-secondary" ng-model="rOfer.hStart">
                                 </div>
                                 <div class="col-6 col-lg-6">
-                                    <input type="time" class="form-control border border-secondary" >
+                                    <input type="time" class="form-control border border-secondary" ng-model="rOfer.hEnd">
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-12 col-12">
                             <label class="fw-semibold form-label">Descripción: </label>
-                            <textarea class="form-control border border-secondary"></textarea>
+                            <textarea class="form-control border border-secondary" ng-model="rOfer.description"></textarea>
                         </div>
                         <div class="col-lg-12 col-12">
                             <label class="fw-semibold form-label">Telefono de contacto: </label>
-                            <input type="text" class="form-control border border-secondary"/>
+                            <input type="text" class="form-control border border-secondary" ng-model="rOfer.offerPhone"/>
                         </div>
                         <div class="col-lg-12 col-12 text-center mt-3">
                                 <div class="btn btn-outline-primary">
                                     <label class="form-label  " for="customFile">Elegir imagen</label>
-                                    <input type="file" class="form-control d-none" id="customFile" ng-model="customFile"  />
+                                    <input type="file" class="form-control d-none" id="customFile"   />
                                 </div>
                                 <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
                                 alt="example placeholder" class="img-fluid rounded" style="width: 250px;" />
@@ -122,7 +122,7 @@
                 <div class="modal-footer">
                     <div class="col-12  d-flex justify-content-end">
                         <button class="btn btn-outline-secondary mt-3 py-2 me-2" type="button" data-bs-dismiss="modal">Cerrar</button>
-                        <button class="btn btn-outline-success mt-3 py-2" type="button" ng-click="guardar()">Guardar</button>
+                        <button class="btn btn-outline-success mt-3 py-2" type="button" ng-click="guardar(rOfer)">Guardar</button>
                 </div>
                 </div>
             </div>
@@ -182,7 +182,7 @@
                 <div class="modal-footer">
                     <div class="col-12  d-flex justify-content-end">
                         <button class="btn btn-outline-secondary mt-3 py-2 me-2" type="button" data-bs-dismiss="modal">Cerrar</button>
-                        <button class="btn btn-outline-success mt-3 py-2" type="button" ng-click="editar()" >Modificar</button>
+                        <button class="btn btn-outline-success mt-3 py-2" type="button" ng-click="editar(eOferta)" >Modificar</button>
                 </div>
                 </div>
             </div>

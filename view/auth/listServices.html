@@ -1,7 +1,7 @@
 <h3 class="fw-normal" id="xd">Oferta de servicios</h3>
 <div ng-controller="ofertaController">
     <div class="row" >
-        <div class="col-lg-4" ng-repeat="oferta in ofertas">
+        <div class="col-lg-4 col-md-6 col-12 col-sm-12" ng-repeat="oferta in ofertas">
             <div class="card my-3 border-0 shadow">
                 <div class="card-header ">
                     <div class="row">
@@ -108,12 +108,12 @@
                         </div>
                         <div class="col-12 col-lg-12 mt-3 text-center">
                             <h3 class="fs-4">Horario: </h3>
-                            <input type="time" class="form-control border border-secondary" ng-model="ofertaSel.schedule" ">
+                            <input type="time" class="form-control border border-secondary" ng-model="ofertaSel.scheduleUs" ">
                         </div>
                        
                         <div class="col-12  d-flex justify-content-end">
                                 <button class="btn btn-outline-secondary mt-3 py-2 me-2" type="button" data-bs-dismiss="modal">Cerrar</button>
-                                <button class="btn btn-outline-success mt-3 py-2" type="button" ng-click="regContrato()">Aceptar</button>
+                                <button class="btn btn-outline-success mt-3 py-2" type="button" ng-click="regContrato(ofertaSel)">Aceptar</button>
                             
                             
                         </div>

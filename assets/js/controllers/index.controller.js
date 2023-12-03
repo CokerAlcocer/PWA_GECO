@@ -12,7 +12,6 @@ app.controller('INDEX_CONTROLLER', ['$rootScope', ($rootScope) => {
         page: parseInt(localStorage.getItem('page')),
         settings: false
     }
-console.log($rootScope.rootConfig.infUser)
     $rootScope.changeView = page => {
         switch(page) {
             case 0:
@@ -29,7 +28,7 @@ console.log($rootScope.rootConfig.infUser)
     }
 
     $rootScope.signup = () => {
-        window.location.replace('../../../view/login.html');
+        window.location.replace('/index.html');
     }
 
     $rootScope.loadUpperbar = () => {

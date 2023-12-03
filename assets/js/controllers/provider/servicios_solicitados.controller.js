@@ -18,7 +18,7 @@ app.controller('ofertSolicitadosController', ['$scope', '$http', ($scope, $http)
         },
         {
             id:2,
-            status: 'Atendido',
+            status: 'Por atender',
             client: 'Jorge Alberto Ortiz',
             service: 'Reparación de refris, microondas...etc',
             description: 'Reparación de refrigerador ya no congela',
@@ -32,7 +32,7 @@ app.controller('ofertSolicitadosController', ['$scope', '$http', ($scope, $http)
     ];
 
 
-    $scope.completar = () =>{
+    $scope.completar = (sol) =>{
             Swal.fire({
                 title: "Finalizando Servicios",
                 text: `¿Seguro de realizarlo?`,
@@ -43,7 +43,9 @@ app.controller('ofertSolicitadosController', ['$scope', '$http', ($scope, $http)
             }).then(res => {
                 //0883C1  5CC8FF
                 if(res.isConfirmed){
-                    $('#offerDetails').modal('hide');
+                    sol.status = 'Atendido'
+                    $scope.solicitados[ $scope.solicitados.findIndex(of=>of.id == sol.id)] = sol;
+                    $scope.$apply();
                     Toastify({
                         text: "Completado",
                         gravity: "top",
@@ -57,7 +59,6 @@ app.controller('ofertSolicitadosController', ['$scope', '$http', ($scope, $http)
                       }).showToast();
         
                 }else{
-                    $('#offerDetails').modal('hide');
                     Toastify({
                         text: "Piensalo más adelante",
                         gravity: "bottom",

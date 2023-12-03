@@ -10,7 +10,7 @@
 <!-- # Contenido App WEB / Responsive -->
 <div class="my-3">
     <div class="row g-4">
-        <div class="col-12 col-md-12 col-lg-6" ng-repeat="service in services">
+        <div class="col-12 col-md-6 col-lg-4 col-sm-6" ng-repeat="service in services">
             <div class="card">
                 <div class="card-header">
                     <div class="row d-flex justify-content-center">
@@ -40,17 +40,17 @@
                             <h3 class="fs-6 fw-semibold">Descripción:</h3>
                             <p class="fs-6 fw-normal" ng-bind="service.description"></p>
                         </div>
-                        <div ng-if="service.status == 'Atendido'" class="row">
+                        <div ng-if="service.status == 'Atendido' && service.valoration == 0" class="row">
                             <div class="col-lg-12 col-12 text-center">
-                                <label for class="form-label fw-bold ">Valoración</label>
-                                <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3">
+                                <label for class="form-label fw-bold ">Valoración: {{user.score}}</label>
+                                <input type="range" class="form-range" min="0" max="100" step="0.1" ng-value="0" id="customRange3" ng-model="user.score">
                             </div>
                             <div class="col-lg-12 col-12 text-center">
                                 <label  class="form-label fw-bold ">Comentarios</label>
-                                <textarea class="form-control border border-secondary" placeholder="Mejora el servicio" ></textarea>
+                                <textarea class="form-control border border-secondary" ng-model="user.comment" placeholder="Mejora el servicio" ></textarea>
                             </div>
                             <div class="col-lg-12 col-12 text-end mt-2">
-                                <button type="button" class="btn btn-outline-primary" ng-click="valorar()">Valorar</button>
+                                <button type="button" class="btn btn-outline-primary" ng-click="valorar(user,service)">Valorar</button>
                             </div>
                         </div>
                     </div>

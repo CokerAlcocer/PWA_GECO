@@ -1,8 +1,8 @@
 app.controller('ofertaController', ['$scope', '$http', ($scope, $http) => {
  
 $scope.ofertaSel = {};
-
-
+$scope.ofertaSel.descriptionUs = ''
+$scope.ofertaSel.scheduleUs = null
 $scope.ofertas = [
     {
         id:1,
@@ -15,6 +15,8 @@ $scope.ofertas = [
         description: 'Contactame para acordar precios y fechas.',
         offerPhone: '+527776542313',
         rating: 55,
+        descriptionUs: '',
+        scheduleUs: null,
         schedule: '09:00 am - 03:00 pm'
 
     },
@@ -28,6 +30,8 @@ $scope.ofertas = [
         description: 'Contactame para conocer tus necesidades y brindarte los precios a tu medida.',
         offerPhone: '+52777098765',
         rating: 80,
+        descriptionUs: '',
+        scheduleUs: null,
         schedule: '10:00 am - 04:30 pm'
     },
     {
@@ -41,6 +45,8 @@ $scope.ofertas = [
         description: 'Contactame para ofrecerte los mejores precios acorde al tamaño de tu piscina.',
         offerPhone: '+527776541235',
         rating: 75,
+        descriptionUs: '',
+        scheduleUs: '',
         schedule: '08:00 am - 03:30 pm'
     },
     {
@@ -54,6 +60,8 @@ $scope.ofertas = [
         description: 'Contactame para ofrecerte los mejores precios acorde al tamaño de tu piscina.',
         offerPhone: '+527776234556',
         rating: 90,
+        descriptionUs: '',
+        scheduleUs: '',
         schedule: '11:00 am - 05:00 pm'
     }
 ];
@@ -61,7 +69,6 @@ $scope.ofertas = [
 
 $scope.adicionInfo = (oferta) =>{
     $scope.ofertaSel = angular.copy(oferta);
-    console.log($scope.ofertaSel)
     $('#offerDetails').modal('show');
 }
 
@@ -71,8 +78,9 @@ $scope.contratar = () =>{
 }
 
 
-$scope.regContrato = () =>{
-    Swal.fire({
+$scope.regContrato = (ofer) =>{
+    if(ofer.descriptionUs != '' && ofer.scheduleUs != null){
+        Swal.fire({
             title: "Contratación del servicio",
             text: `¿Seguro de solicitarlo?`,
             icon: "info",
@@ -104,6 +112,19 @@ $scope.regContrato = () =>{
                     }
                   }).showToast();
             }
+            $('#offerContract').modal('hide');
         })
+    }else{
+        Toastify({
+            text: "Campos faltantes",
+            gravity: "bottom",
+            position: 'left',
+            close: true,
+            style: {
+              background: "linear-gradient(to right, #C8770F, #FFB250)",
+            }
+          }).showToast();
+    }
+ 
 }
 }]);
