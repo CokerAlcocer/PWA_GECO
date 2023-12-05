@@ -123,8 +123,7 @@
                                         <span ng-if="register.passwordConfirmation != undefined && register.password != register.passwordConfirmation" class="error-info">Contraseñas no coinciden</span>
                                     </div>
                                     <div class="col-12">
-                                        <button ng-if="registerForm.$invalid && register.password != register.passwordConfirmation" type="button" class="btn btn-secondary mt-3 py-2 col-12" disabled>Registrarme</button>
-                                        <button ng-if="registerForm.$valid && register.password == register.passwordConfirmation" type="submit" class="btn btn-secondary mt-3 py-2 col-12" ng-click="registrar(register)">Registrarme</button>
+                                        <button ng-disabled="registerForm.$invalid || ( register.passwordConfirmation == undefined || register.password) && register.password != register.passwordConfirmation" type="submit" class="btn btn-secondary mt-3 py-2 col-12" ng-click="registrar(register)">Registrarme</button>
                                         <a class="btn btn-outline-secondary mt-3 py-2 col-12" ng-click="changeForm()">Iniciar sesión</a>
                                     </div>
                                 </div>
