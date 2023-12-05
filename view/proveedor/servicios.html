@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="row" >
-        <div class="col-lg-4" ng-repeat="oferta in ofertas">
+        <div class="col-lg-4 d-flex align-items-stretch " ng-repeat="oferta in ofertas">
             <div class="card my-3 border-0 shadow">
                 <div class="card-header ">
                     <div class="row">
@@ -19,7 +19,7 @@
                             <i class="bi bi-person-badge-fill" style="font-size: 2em;"></i>
                         </div>
                         <div class="col-lg-8 col-8 col-md-8 d-flex justify-content-center align-items-center ">
-                            <p class=" fw-bolder  ms-1" ng-bind="oferta.name"></p>
+                            <p class=" fw-bolder" style="font-size: 0.9vw;" ng-bind="oferta.name" ></p>
                         </div>
                         <div class="col-lg-3 col-3 col-md-3 d-flex justify-content-center align-items-center ">
                             <span class="badge" ng-class="{'text-bg-success':oferta.status == 'Activo' ,
@@ -36,16 +36,16 @@
                         <div class="col-12 col-lg-8">
                             <div class="row ">
                                 <div class="col-lg-12 col-12 d-flex align-content-between">
-                                    <h3 class="fw-bold fs-5">Slogan:</h3>
+                                    <h3 class="fw-bold fs-6">Slogan:</h3>
                                     <p ng-bind="oferta.slogan" class=" fs-6 ms-2"></p>      
                                 </div>
                                  <div class="col-lg-12 col-12 d-flex align-items-center">
-                                    <h3 class="fw-bold fs-5">Precio base:</h3>
-                                    <p class="fw-semibold fs-4 ms-3 " ng-bind="oferta.price"></p>    
+                                    <h3 class="fw-bold fs-6">Precio base:</h3>
+                                    <p class="fw-semibold fs-5 ms-3 " ng-bind="oferta.price"></p>    
                                  </div>
                                  <div class="col-lg-12 col-12 d-flex align-items-center">
-                                    <h3 class="fw-bold fs-5">Descripción:</h3>
-                                    <p class="fw-normal fs-6 ms-3 " ng-bind="oferta.description"></p>    
+                                    <h3 class="fw-bold fs-6">Descripción:</h3>
+                                    <p class="fw-normal fs-6 ms-2 " ng-bind="oferta.description"></p>    
                                  </div>   
                             </div>
                             
@@ -172,7 +172,7 @@
                         <div class="col-lg-12 col-12 text-center mt-3">
                                 <div class="btn btn-outline-primary">
                                     <label class="form-label  " for="customFile1">Elegir imagen</label>
-                                    <input type="file" class="form-control d-none" id="customFile1" ng-model="customFile"  />
+                                    <input type="file" class="form-control d-none" id="customFile1"  />
                                 </div>
                                 <img id="selectedImage1" src="{{eOferta.img ? eOferta.img : 'https://mdbootstrap.com/img/Photos/Others/placeholder.jpg'}}"
                                 alt="example placeholder" class=" rounded" style="width: 250px; height: 200px; !important" />

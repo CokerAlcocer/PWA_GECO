@@ -36,7 +36,7 @@ app.controller('ofertServiciosController', ['$scope', '$http', ($scope, $http) =
                 img: '../../../assets/images/thingjpg.jpg',
                 price: '$400',
                 slogan: 'El rendimiento a tu alcanze',
-                description: 'Contactame para conocer tus necesidades y brindarte los precios a tu medida.',
+                description: 'Contactame para conocer tus necesidades.',
                 offerPhone: '+52777098765',
                 rating: 80,
                 hStart: 'Thu Jan 01 1970 00:53:00 GMT-0600 (hora estándar central)',
@@ -85,6 +85,7 @@ app.controller('ofertServiciosController', ['$scope', '$http', ($scope, $http) =
            
                    reader.onload = function(e) {
                        selectedImage.src = e.target.result;
+                       $scope.eOferta.img = e.target.result
                    };
            
                    reader.readAsDataURL(event.target.files[0]);
