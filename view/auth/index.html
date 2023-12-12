@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="GECO_PWA">
 <head>
-    <span ng-include src="'../template/headers.html'"></span>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/loader.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/css/sweetalert2.min.css">
+    <link rel="stylesheet" href="../../assets/css/general.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap-icons.min.css">
     <title>GECO | Centro de control</title>
 </head>
-<body ng-controller="INDEX_CONTROLLER">
+<body class="z-0" ng-controller="INDEX_CONTROLLER" ng-init="loadPage()">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="../../assets/js/angular.min.js"></script>
     <script src="../../assets/js/app.js"></script>
     <script src="../../assets/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/sweetalert2.all.min.js"></script>
     <script src="../../assets/js/controllers/index.controller.js"></script>
+    <script src="../../assets/js/controllers/dashboard.controller.js"></script>
+    <script src="../../assets/js/controllers/rooms.controller.js"></script>
+    <script src="../../assets/js/controllers/types.controller.js"></script>
+    <script src="../../assets/js/controllers/evi.controller.js"></script>
+    <script src="../../assets/js/controllers/users.controller.js"></script>
 
     <!-- # Barra de navegación superior -->
     <span ng-include onload="loadUpperbar()" src="'../template/upperbar.html'"></span>
@@ -22,11 +34,11 @@
         <!-- # Sidebar -->
         <!-- # Contenido -->
         <div class="content-page p-3 py-3">
-            <span ng-if="rootConfig.page === 0 && rootConfig.user.role === 'Gerente'" ng-include src="'./dashboard.html'"></span>
-            <span ng-if="rootConfig.page === 1 && rootConfig.user.role === 'Gerente'" ng-include src="'./bedrooms.html'"></span>
-            <span ng-if="rootConfig.page === 2 && rootConfig.user.role === 'Gerente'" ng-include src="'./users.html'"></span>
-            <span ng-if="rootConfig.page === 3 && rootConfig.user.role === 'Gerente'" ng-include src="'./review-items.html'"></span>
-            <span></span>
+            <span ng-if="rootConfig.page === 0" ng-include src="'./dashboard.html'"></span>
+            <span ng-if="rootConfig.page === 1" ng-include src="'./bedrooms.html'"></span>
+            <span ng-if="rootConfig.page === 2 && rootConfig.rol.name === 'ROLE_GERENTE'" ng-include src="'./users.html'"></span>
+            <span ng-if="rootConfig.page === 3 && rootConfig.rol.name === 'ROLE_GERENTE'" ng-include src="'./review-items.html'"></span>
+            <span ng-if="rootConfig.page === 4 && rootConfig.rol.name === 'ROLE_GERENTE'" ng-include src="'./types.html'"></span>
         </div>
         <!-- # Contenido -->
 

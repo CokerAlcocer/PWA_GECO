@@ -1,83 +1,89 @@
-<h3 class="fw-normal" id="xd">Habitaciones</h3>
-<div class="my-3 d-flex flex-row">
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Buscar por identificador">
-        <button class="btn btn-primary rounded-end" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
-        <button class="btn btn-success ms-2 px-2 py-0 rounded-start"><i class="fs-4 bi bi-plus-lg"></i></button>
+<span ng-controller="ROOMS_CONTROLLER" ng-init="findRoom()">
+    <div ng-if="loader" class="d-flex h-100 align-items-center justify-content-center">
+        <div class="custom-loader"></div>
     </div>
-</div>
+    <div ng-if="!loader">
+        <h3 class="fw-normal" id="xd">Habitaciones</h3>
+        <div ng-if="typeList.length === 0" class="mt-3 col-12">
+            <div class="alert alert-warning">Aún no hay registros sobre "Tipos de cuarto", profavor registre un tipo de cuarto para poder utilizar este apartado.</div>
+        </div>
+        <div ng-if="roomListShowed.length === 0 && typeList.length !== 0" class="mt-3 col-12">
+            <div class="alert alert-warning">Aún no hay registros, da click <b role="button" data-bs-toggle="modal" data-bs-target="#saveRoom">aquí</b> para agregar un nuevo registro</div>
+        </div>
+        <div ng-if="roomListShowed.length !== 0 && typeList.length !== 0" class="my-3 d-flex flex-row">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Buscar por identificador">
+                <button class="btn btn-primary rounded-end" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
+                <button class="btn btn-success ms-2 px-2 py-0 rounded-start" data-bs-toggle="modal" data-bs-target="#saveRoom"><i class="fs-4 bi bi-plus-lg"></i></button>
+            </div>
+        </div>
 
-<!-- # Contenido App WEB / Responsive -->
-<div class="my-3">
-    <div class="row g-4">
-        <div class="col-12 col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex flex-row align-items-center">
-                        <span class="fs-4">ID-XX</span>
-                        <div class="ms-auto rounded-circle border-0 circle-status alert alert-success p-3 m-0"></div>
-                    </div>
-                    <div class="mt-3">
-                        <button class="btn btn-primary py-1 px-2"><i class="fw-bold bi bi-info-circle"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex flex-row align-items-center">
-                        <span class="fs-4">ID-XX</span>
-                        <div class="ms-auto rounded-circle border-0 circle-status alert alert-secondary p-3 m-0"></div>
-                    </div>
-                    <div class="mt-3">
-                        <button class="btn btn-primary py-1 px-2"><i class="fw-bold bi bi-info-circle"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex flex-row align-items-center">
-                        <span class="fs-4">ID-XX</span>
-                        <div class="ms-auto rounded-circle border-0 circle-status alert alert-primary p-3 m-0"></div>
-                    </div>
-                    <div class="mt-3">
-                        <button class="btn btn-primary py-1 px-2"><i class="fw-bold bi bi-info-circle"></i></button>
+        <!-- # Contenido App WEB / Responsive -->
+        <div ng-if="roomListShowed.length !== 0 && typeList.length !== 0" class="my-3">
+            <div class="row g-4">
+                <div class="col-12 col-lg-6" ng-repeat="room in roomListShowed track by room.idRoom">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-row align-items-start">
+                                <span class="fw-bold">{{room.name ? room.name : 'NC-'+room.roomNumber}}</span>
+                                <div ng-class="{
+                                    'alert-success': room.status === 1,
+                                    'alert-secondary': room.status === 2,
+                                    'alert-primary': room.status === 3,
+                                    'alert-warning': room.status === 4,
+                                    'alert-danger': room.status === 5
+                                }" class="ms-auto rounded-circle border-0 circle-status alert p-3 m-0"></div>
+                            </div>
+                            <div class="col-12 d-flex flex-row align-items-end">
+                                <div class="mt-3">
+                                    <button class="btn btn-primary py-1 px-2"><i class="fw-bold bi bi-pencil-fill"></i></button>
+                                    <button ng-if="room.status === 3" class="btn btn-primary py-1 px-2"><i class="fw-bold bi bi-clipboard-check-fill"></i></button>
+                                    <button ng-if="room.status === 4" class="btn btn-warning py-1 px-2"><i class="fw-bold bi bi-exclamation-triangle-fill"></i></button>
+                                </div>
+                                <div class="ms-auto">
+                                    <small ng-if="room.name" class="me-2 text-muted">({{'NC-'+room.roomNumber}})</small>
+                                    <span class="badge" ng-style="styles.active" ng-bind="room.idTypeRoom.name"></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex flex-row align-items-center">
-                        <span class="fs-4">ID-XX</span>
-                        <div class="ms-auto rounded-circle border-0 circle-status alert alert-warning p-3 m-0"></div>
-                    </div>
-                    <div class="mt-3">
-                        <button class="btn btn-warning py-1 px-2"><i class="fw-bold bi bi-exclamation-triangle-fill"></i></button>
-                        <button class="btn btn-primary py-1 px-2"><i class="fw-bold bi bi-info-circle"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex flex-row align-items-center">
-                        <span class="fs-4">ID-XX</span>
-                        <div class="ms-auto rounded-circle border-0 circle-status alert alert-danger p-3 m-0"></div>
-                    </div>
-                    <div class="mt-3">
-                        <button class="btn btn-primary py-1 px-2"><i class="fw-bold bi bi-clipboard-check-fill"></i></button>
-                        <button class="btn btn-primary py-1 px-2"><i class="fw-bold bi bi-info-circle"></i></button>
+        <!-- # Contenido App WEB / Responsive -->
+        <div class="my-5 hid-web text-white">.</div>
+
+        <div class="modal fade" id="saveRoom" data-bs-backdrop="static" data-bs-keyboard="false"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content z-3">
+                    <div class="modal-body">
+                        <h3 class="fw-normal">Crear nuevo cuarto</h3>
+                        <hr class="mb-4">
+                        <form name="formRoom" class="mt-4">
+                            <div class="row g-3">
+                                <div class="col-12 form-group overlay">
+                                    <input type="text" id="roomName" name="roomName" ng-model="room.name" ng-trim="false" class="geco-input" autocomplete="off">
+                                    <label for="">Nombre</label>
+                                    <span ng-if="formRoom.roomName.$touched && (formRoom.roomName.$error.required) && !formRoom.roomName.$error.pattern" class="error-info">Este campo es obligatorio</span>
+                                    <span ng-if="formRoom.roomName.$error.pattern" class="error-info">Este campo solo acepta</span>
+                                </div>
+                                <div class="col-12 form-group overlay">
+                                    <select class="geco-input" ng-options="typo as typo.name for typo in typeList track by typo.idTypeRoom" ng-model="room.idTypeRoom" required>
+                                    </select>
+                                    <label for="">Tipo de cuarto</label>
+                                    <span ng-if="formRoom.username.$touched && (formRoom.username.$error.required) && !formRoom.username.$error.pattern" class="error-info">Este campo es obligatorio</span>
+                                    <span ng-if="formRoom.username.$error.pattern" class="error-info">Este campo solo acepta</span>
+                                </div>
+                                <div class="col-12 text-end">
+                                    <button class="btn btn-outline-secondary mt-3 py-2" type="button" data-bs-dismiss="modal">Cerrar</button>
+                                    <button ng-if="formRoom.$invalid" type="button" class="btn btn-primary mt-3 py-2" disabled>Guardar</button>
+                                    <button ng-if="formRoom.$valid" type="button" ng-click="create()" class="btn btn-primary mt-3 py-2" data-bs-dismiss="modal">Guardar</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- # Contenido App WEB / Responsive -->
-<div class="my-5 hid-web text-white">.</div>
+</span>

@@ -1,5 +1,5 @@
 app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
-    const CONST_URL = 'ip_servicios';
+    const API_URL = 'http://localhost:8080';
     (() => {
         let token = localStorage.getItem('token');
         if (token) {
@@ -11,6 +11,8 @@ app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
         $scope.switchOperation();
     });
 
+    $scope.loginButtonLoader = false;
+    $scope.error = false;
     $scope.sessionActive = false;
 
     $scope.user = {}
@@ -22,38 +24,29 @@ app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
     } 
 
     const login = async () => {
-        // try {
-        //     await $http({
-        //         url: `${CONST_URL}/user/login`,
-        //         method: 'POST',
-        //         headers: {
-        //             'Accept': 'application/json',
-        //             'Content-Type': 'application/json'
-        //         },
-        //         data: JSON.stringify({
-        //             email: $scope.user.name,
-        //             password: $scope.user.password
-        //         })
-        //     }).then(({data: {data: {token, idUser}}}) => {
-        //         if(token && idUser) {
-        //             initSession(token, idUser);
-        //         } else {
-        //             $scope.error = 500;
-        //         }
-        //     }).catch(err => {
-        //         console.log(err);
-        //     });
-        // } catch (error) {
-        //     console.log('SIGNING_ERROR');
-        // }
-        initSession('token xd', {});
+        $scope.loginButtonLoader = true;
+        $scope.error = false;
+        $http({
+            url: `${API_URL}/api/user/login`,
+            method: 'POST',
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            data: JSON.stringify($scope.user)
+        }).then(({data}) => {
+            initSession(data);
+        }).catch(() => {
+            $scope.error = true;
+            $scope.loginButtonLoader = false;
+        });
     }
 
-    const initSession = (token, idUser) => {
+    const initSession = ({user, token}) => {
+        delete user.password;
+        console.log(user);
+        localStorage.setItem('userInSession', JSON.stringify(user));
         localStorage.setItem('token', token);
-        localStorage.setItem('user', 'Test User');
-        localStorage.setItem('role', 'Gerente');
-        //localStorage.setItem('userSession', JSON.stringify(idUser));
         localStorage.setItem('page', 0);
         window.location.replace('../../../view/auth/index.html');
     }

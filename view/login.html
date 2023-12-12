@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="GECO_PWA">
 <head>
-    <span ng-include src="'./template/headers.html'"></span>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/loader.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/css/sweetalert2.min.css">
+    <link rel="stylesheet" href="../../assets/css/general.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap-icons.min.css">
     <title>GECO | Inicio de sesión</title>
 </head>
 <body ng-controller="LOGIN_CONTROLLER">
@@ -14,7 +20,7 @@
 
     <!-- # Contenido de la página -->
     <div class="page-container">
-        <div class="row px-0 py-5 m-0" style="overflow-y: auto;">
+        <div class="row px-0 py-5 m-0 w-100" style="overflow-y: auto;">
             <!-- # Formulario de inicio de sesión -->
             <div ng-if="form" class="col-12 col-lg-6">
                 <div class="d-flex align-items-center justify-content-center" style="height: 100%;">
@@ -28,8 +34,8 @@
                             <form class="mt-4" name="loginForm">
                                 <div class="row g-4">
                                     <div class="col-12 form-group overlay">
-                                        <input type="text" id="user" name="user" ng-model="user.name" pattern="^[a-z0-9_.]{4,}@[a-z]{2,}(\.[a-z]{2,})+$" ng-trim="false" required class="geco-input" autocomplete="off"> 
-                                        <label for="">Correo electrónico</label>
+                                        <input type="text" id="user" name="user" ng-model="user.user" ng-trim="false" required class="geco-input" autocomplete="off"> 
+                                        <label for="">Usuario o correo electrónico</label>
                                         <span ng-if="loginForm.user.$touched && (loginForm.user.$error.required) && !loginForm.user.$error.pattern" class="error-info">Este campo es obligatorio</span>
                                         <span ng-if="loginForm.user.$error.pattern" class="error-info">Favor de colocar un correo válido</span>
                                     </div>
@@ -48,13 +54,13 @@
                                         </span>
                                     </div>
                                     <div ng-if="error" class="col-12">
-                                        <div ng-if="error === 404" class="alert alert-warning mb-0">
+                                        <div class="alert alert-warning mb-0">
                                             <b>Las credenciales proporcionadas no existen.</b> Si usted cree que esto es un error, favor de comunicarse con un administrador.
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <button ng-if="loginForm.$invalid" type="button" class="btn btn-secondary mt-3 py-2 col-12" disabled>Iniciar sesión</button>
-                                        <button ng-if="loginForm.$valid" type="submit" class="btn btn-secondary mt-3 py-2 col-12">Iniciar sesión</button>
+                                        <button ng-if="loginForm.$valid" type="submit" class="btn btn-secondary mt-3 py-2 col-12 d-flex flex-row justify-content-center" ng-disabled="loginButtonLoader">Iniciar sesión<div ng-show="loginButtonLoader" class="ms-3 small-loader"></div></button>
                                         <a class="btn btn-outline-secondary mt-3 py-2 col-12" ng-click="changeForm()">¡Registrate!</a>
                                         <p class="text-center mt-4"><a href="">¿Olvidaste tu contraseña?</a></p>
                                     </div>

@@ -1,27 +1,43 @@
 app.controller('INDEX_CONTROLLER', ['$rootScope', '$http', ($rootScope, $http) => {
-    const CONST_URL = 'http://localhost:8080';
+    const API_URL = 'http://localhost:8080';
     (() => {
         let token = localStorage.getItem('token');
         if (!token) {
             window.location.replace('../../../view/errors/403.html');
         }
     })();
-
     let isSideShowing = false;
-    $rootScope.loader = true;
-    $rootScope.rootConfig = {}
-    $rootScope.styles = {}
+    $rootScope.loader = false;
+    $rootScope.rootConfig = {
+        page: 0
+    };
+    $rootScope.styles = {};
 
-    $rootScope.loadPage = async () => {
-        await fetch('http://localhost:8080/hotel/getHotel/2', {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem('token')
+    $rootScope.logout = () => {
+        localStorage.clear();
+        window.location.replace('../../../view/login.html');
+    }
+
+    $rootScope.loadPage = () => {
+        let userInSession = JSON.parse(localStorage.getItem('userInSession'));
+        $rootScope.rootConfig = {
+            user: {username, email, status, turn, idUser} = userInSession,
+            hotel: userInSession.idHotel,
+            rol: userInSession.idRol,
+            person: userInSession.idPerson,
+            page: 0
+        }
+
+        $rootScope.styles = {
+            active: {
+                'background-color': $rootScope.rootConfig.hotel.primaryColor,
+                'color': '#FFFFFF'
+            },
+            inactive: {
+                'background-color': '#FFFFFF',
+                'color': $rootScope.rootConfig.hotel.secondaryColor
             }
-        }).then(res => {
-            console.log(res);
-        })
+        }
     }
 
     $rootScope.changeView = page => {
@@ -30,6 +46,7 @@ app.controller('INDEX_CONTROLLER', ['$rootScope', '$http', ($rootScope, $http) =
             case 1:
             case 2:
             case 3:
+            case 4:
                 $rootScope.showSideBar();
                 localStorage.setItem('page', page);
                 $rootScope.rootConfig.page = page;
@@ -41,7 +58,7 @@ app.controller('INDEX_CONTROLLER', ['$rootScope', '$http', ($rootScope, $http) =
     
     $rootScope.loadUpperbar = () => {
         const element = document.getElementById('upperbar');
-        element.style.backgroundColor = $rootScope.rootConfig.hotel.colors[0];
+        element.style.backgroundColor = $rootScope.rootConfig.hotel.primaryColor;
     }
 
     $rootScope.loadSidebarItem = page => page === $rootScope.rootConfig.page ? $rootScope.styles.active : $rootScope.styles.inactive;
