@@ -148,4 +148,10 @@ body {
     .content-page {
         width: calc(100vw - 250px);
     }
+
+    .scroll {
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: calc(100vh - 220px);
+    }
 }

@@ -5,8 +5,8 @@ app.controller('USERS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
     $scope.userListShowed = [];
     $scope.user = {};
     
-    $scope.findUsers = () => {
-        $http({
+    $scope.findUsers = async () => {
+        await $http({
             url: `${API_URL}/api/user/hotel/${$rootScope.rootConfig.hotel.idHotel}`,
             method: 'GET',
             headers: {
@@ -96,8 +96,8 @@ app.controller('USERS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
     }
 
     $scope.filterList = () => {
-        $scope.userListShowed = $scope.userList;
-    }
+        $scope.userListShowed = $scope.userList.filter(user => user.idUser !== $rootScope.rootConfig.user.idUser)
+    };
 
     $scope.clearForm = () => $scope.user = {};
     $scope.modify = ({idUser, email, username, turn, idRol}) => {

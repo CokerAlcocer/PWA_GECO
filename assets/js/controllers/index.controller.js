@@ -3,25 +3,44 @@ app.controller('INDEX_CONTROLLER', ['$rootScope', '$http', ($rootScope, $http) =
     (() => {
         let token = localStorage.getItem('token');
         if (!token) {
-            window.location.replace('../../../view/errors/403.html');
+            window.location.replace('../../../index.html');
         }
     })();
     let isSideShowing = false;
-    $rootScope.loader = false;
-    $rootScope.rootConfig = {
-        page: 0
-    };
+    $rootScope.loader = true;
+    $rootScope.hotel = {};
+    $rootScope.rootConfig = {};
     $rootScope.styles = {};
 
     $rootScope.logout = () => {
         localStorage.clear();
-        window.location.replace('../../../view/login.html');
+        window.location.replace('../../../index.html');
     }
 
-    $rootScope.loadPage = () => {
+    $rootScope.changeView = page => {
+        console.log('selected' + page);
+        switch(page) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                $rootScope.showSideBar();
+                localStorage.setItem('page', page);
+                $rootScope.rootConfig.page = page;
+                break;
+            default:
+                $rootScope.rootConfig.page = 0;
+        }
+
+        return page;
+    }
+
+    $rootScope.loadPage = async () => {
         let userInSession = JSON.parse(localStorage.getItem('userInSession'));
+        let {username, email, status, turn, idUser} = userInSession;
         $rootScope.rootConfig = {
-            user: {username, email, status, turn, idUser} = userInSession,
+            user: {username, email, status, turn, idUser},
             hotel: userInSession.idHotel,
             rol: userInSession.idRol,
             person: userInSession.idPerson,
@@ -38,22 +57,8 @@ app.controller('INDEX_CONTROLLER', ['$rootScope', '$http', ($rootScope, $http) =
                 'color': $rootScope.rootConfig.hotel.secondaryColor
             }
         }
-    }
 
-    $rootScope.changeView = page => {
-        switch(page) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-                $rootScope.showSideBar();
-                localStorage.setItem('page', page);
-                $rootScope.rootConfig.page = page;
-                break;
-            default:
-                $rootScope.rootConfig.page = 0;
-        }
+        $rootScope.loader = false;
     }
     
     $rootScope.loadUpperbar = () => {
@@ -64,6 +69,7 @@ app.controller('INDEX_CONTROLLER', ['$rootScope', '$http', ($rootScope, $http) =
     $rootScope.loadSidebarItem = page => page === $rootScope.rootConfig.page ? $rootScope.styles.active : $rootScope.styles.inactive;
 
     $rootScope.showSiteSettings = flag => {
+        $rootScope.hotel = angular.copy($rootScope.rootConfig.hotel);
         if(flag) {
             $rootScope.rootConfig.settings = !$rootScope.rootConfig.settings;
         } else {
@@ -85,4 +91,57 @@ app.controller('INDEX_CONTROLLER', ['$rootScope', '$http', ($rootScope, $http) =
         isSideShowing = !isSideShowing;
     }
 
+    $rootScope.updateConfig = async () => {
+        $rootScope.loader = true;
+        await $http({
+            url: `${API_URL}/api/hotel`,
+            method: 'PUT',
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
+            },
+            data: JSON.stringify($rootScope.hotel)
+        }).then(({data}) => {
+            Swal.fire({
+                title: 'Operación exitosa',
+                text: 'Se han actualzado las configuraciones del sitio, vuelve a iniciar sesión para ver los cambios',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                $rootScope.logout();
+            });
+            $rootScope.loader = false;
+        }).catch(() => {
+            Swal.fire({
+                title: 'Error...',
+                text: 'No se pudo realizar la operación',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                onc
+            });
+            $rootScope.loader = false;
+        });
+    }
+
+    const isOnline = () => {
+        if (navigator.onLine) {
+            Swal.fire({
+                title: 'Cambio de estado',
+                text: 'Actualmente se encuentra en modo ONLINE',
+                icon: 'info',
+                confirmButtonText: 'OK',
+            });
+        } else {
+            Swal.fire({
+                title: 'Cambio de estado',
+                text: 'Actualmente se encuentra en modo OFFLINE',
+                icon: 'info',
+                confirmButtonText: 'OK',
+            });
+        }
+    }
+    
+    window.addEventListener('online', isOnline());
+    window.addEventListener('offline', isOnline());
 }]);
