@@ -19,7 +19,8 @@ app.controller('ROOMS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`
+                "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                "Access-Control-Allow-Origin":"*"
             }
         }).then(({data}) => {
             $scope.roomList = data.data ? data.data : [];
@@ -64,7 +65,8 @@ app.controller('ROOMS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`
+                "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                "Access-Control-Allow-Origin":"*"
             }
         }).then(({data}) => {
             $scope.typeList = data.data ? data.data : [];
@@ -87,7 +89,8 @@ app.controller('ROOMS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`
+                "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                "Access-Control-Allow-Origin":"*"
             }
         }).then(({data}) => {
             data.data.forEach(user => {
@@ -120,7 +123,8 @@ app.controller('ROOMS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`
+                "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                "Access-Control-Allow-Origin":"*"
             },
             data: JSON.stringify($scope.room)
         }).then(({data}) => {
@@ -158,7 +162,8 @@ app.controller('ROOMS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`
+                "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                "Access-Control-Allow-Origin":"*"
             },
             data: JSON.stringify($scope.room)
         }).then(({data}) => {
@@ -190,7 +195,8 @@ app.controller('ROOMS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`
+                "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                "Access-Control-Allow-Origin":"*"
             },
             data: JSON.stringify({status: 2})
         }).then(({data}) => {
@@ -220,7 +226,8 @@ app.controller('ROOMS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`
+                "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                "Access-Control-Allow-Origin":"*"
             },
             data: JSON.stringify({status: 5})
         }).then(({data}) => {
@@ -259,7 +266,8 @@ app.controller('ROOMS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
                     headers: {
                         "Accept": "application/json",
                         "Content-Type": "application/json",
-                        "Authorization": `Bearer ${localStorage.getItem('token')}`
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                        "Access-Control-Allow-Origin":"*"
                     },
                     data: JSON.stringify({status: 3})
                 }).then(({data}) => {
@@ -324,7 +332,8 @@ app.controller('ROOMS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
                         headers: {
                             "Accept": "application/json",
                             "Content-Type": "application/json",
-                            "Authorization": `Bearer ${localStorage.getItem('token')}`
+                            "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                            "Access-Control-Allow-Origin":"*"
                         },
                         data: JSON.stringify({status: !flag ? 1 : 5})
                     }).then(({data}) => {

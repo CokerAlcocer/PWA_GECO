@@ -12,7 +12,8 @@ app.controller('DASHBOARD_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`
+                "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                "Access-Control-Allow-Origin":"*"
             }
         }).then(({data}) => {
             $scope.roomList = data.data;

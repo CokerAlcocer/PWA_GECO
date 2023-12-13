@@ -12,7 +12,8 @@ app.controller('USERS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`
+                "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                "Access-Control-Allow-Origin":"*"
             }
         }).then(({data}) => {
             $scope.userList = data.data ? data.data : [];
@@ -39,7 +40,8 @@ app.controller('USERS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`
+                "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                "Access-Control-Allow-Origin":"*"
             },
             data: JSON.stringify($scope.user)
         }).then(({data}) => {
@@ -71,7 +73,8 @@ app.controller('USERS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`
+                "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                "Access-Control-Allow-Origin":"*"
             },
             data: JSON.stringify($scope.user)
         }).then(({data}) => {
@@ -111,7 +114,8 @@ app.controller('USERS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`
+                "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                "Access-Control-Allow-Origin":"*"
             }
         }).then(() => {
             Swal.fire({

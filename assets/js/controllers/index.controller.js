@@ -99,7 +99,8 @@ app.controller('INDEX_CONTROLLER', ['$rootScope', '$http', ($rootScope, $http) =
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`
+                "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                "Access-Control-Allow-Origin":"*"
             },
             data: JSON.stringify($rootScope.hotel)
         }).then(({data}) => {

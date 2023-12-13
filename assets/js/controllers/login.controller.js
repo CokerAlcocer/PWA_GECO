@@ -37,7 +37,8 @@ app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
             method: 'POST',
             headers: {
                 "Accept": "application/json",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin":"*"
             },
             data: JSON.stringify($scope.user)
         }).then(({data}) => {
@@ -91,7 +92,8 @@ app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
                 method: 'POST',
                 headers: {
                     "Accept": "application/json",
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin":"*"
                 },
                 data: JSON.stringify($scope.user)
             }).then(() => {
