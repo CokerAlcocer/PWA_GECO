@@ -1,5 +1,5 @@
 app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
-    const API_URL = 'http://52.1.80.209:8081';
+    const API_URL = 'http://192.168.55.51:8080';
     (() => {
         let token = localStorage.getItem('token');
         if (token) {
@@ -84,9 +84,7 @@ app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
             headers: {"Content-Type": undefined},
             data: formData
         }).then(async ({data}) => {
-            console.log($scope.user);
             $scope.user.idHotel.imageUrl = data.imageUrl;
-            console.log($scope.user);
             await $http({
                 url: `${API_URL}/api/user/hotel`,
                 method: 'POST',
@@ -113,11 +111,10 @@ app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
                     confirmButtonText: 'OK'
                 });
             });
-        }).catch(err => {
-            console.log(err);
+        }).catch(() => {
             Swal.fire({
                 title: 'Error...',
-                text: 'No se pudo realizar la operación',
+                text: 'No se pudo subir la imagen',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
