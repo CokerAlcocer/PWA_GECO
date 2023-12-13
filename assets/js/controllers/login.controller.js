@@ -1,5 +1,5 @@
 app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
-    const API_URL = 'http://localhost:8080';
+    const API_URL = 'http://52.1.80.209:8081';
     (() => {
         let token = localStorage.getItem('token');
         if (token) {
