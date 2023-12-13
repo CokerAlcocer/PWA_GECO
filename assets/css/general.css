@@ -22,6 +22,7 @@ body {
 .page-container {
     height: calc(100vh - 66px);
     display: flex;
+    flex-direction: row;
 }
 
 .text-principal {
@@ -109,16 +110,17 @@ body {
 @media screen and (max-width: 425px) {
     .hidden {
         display: none !important;
+        transition: 0.25s;
     }
 
     .sidebar {
         width: 250px;
         position: absolute;
-        z-index: 2;
+        z-index: 4;
     }
 
     .sidebar + .backdrop {
-        z-index: 1;
+        z-index: 3;
         position: absolute;
         left: 0;
         top: 0;
@@ -128,7 +130,6 @@ body {
     }
 
     .content-page {
-        z-index: 0;
         width: 100%;
         overflow-y: auto;
         overflow-x: hidden;
@@ -146,5 +147,11 @@ body {
 
     .content-page {
         width: calc(100vw - 250px);
+    }
+
+    .scroll {
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: calc(100vh - 220px);
     }
 }
