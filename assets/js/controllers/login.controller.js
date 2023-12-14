@@ -5,7 +5,7 @@ app.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = 'Content-Type';
 }]);
 app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
-    const API_URL = 'http://http://52.1.80.209:8081';
+    const API_URL = 'http://52.1.80.209:8081';
     (() => {
         let token = localStorage.getItem('token');
         if (token) {
