@@ -1,5 +1,11 @@
+app.config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.defaults.withCredentials = true;
+    $httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+    $httpProvider.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
+    $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = 'Content-Type';
+}]);
 app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
-    const API_URL = 'http://192.168.55.51:8080';
+    const API_URL = 'http://localhost:8080';
     (() => {
         let token = localStorage.getItem('token');
         if (token) {
@@ -81,7 +87,8 @@ app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
             url: `${API_URL}/api/image-upload/hotel`,
             method: 'POST',
             transformRequest: angular.identity,
-            headers: {"Content-Type": undefined},
+            headers: {"Content-Type": undefined,
+            "Access-Control-Allow-Origin":"*"},
             data: formData
         }).then(async ({data}) => {
             $scope.user.idHotel.imageUrl = data.imageUrl;
