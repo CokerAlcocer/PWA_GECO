@@ -11,6 +11,7 @@
                         <span class="fw-light role" ng-bind="rootConfig.rol.description"></span>
                     </div>
                 </div>
+                <span class="badge bg-danger" id="mode">MODO OFFLINE <br></span>
                 <span class="badge" ng-style="styles.active" ng-if="rootConfig.user.turn === 1 && rootConfig.rol.idRol === 3">Turno Matutino</span>
                 <span class="badge" ng-style="styles.active" ng-if="rootConfig.user.turn === 2 && rootConfig.rol.idRol === 3">Turno Vespertino</span>
             </div>

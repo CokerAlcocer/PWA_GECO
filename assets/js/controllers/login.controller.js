@@ -17,6 +17,7 @@ app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
         $scope.switchOperation();
     });
 
+    $scope.loader = false;
     $scope.loginButtonLoader = false;
     $scope.error = false;
     $scope.sessionActive = false;

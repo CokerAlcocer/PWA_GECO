@@ -432,7 +432,7 @@ app.controller('ROOMS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
             data: JSON.stringify($scope.incidence)
         }).then(async () => {
             await $http({
-                url: `${API_URL}/api/incidence/status/${$scope.room.idRoom}`,
+                url: `${API_URL}/api/room/status/${$scope.room.idRoom}`,
                 method: 'PUT',
                 headers: {
                     "Accept": "application/json",
@@ -444,8 +444,8 @@ app.controller('ROOMS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
             }).then(() => {
                 Swal.fire({
                     title: 'Operación exitosa',
-                    text: 'El registro se realizó con exito',
-                    icon: 'success',
+                    text: 'El registro se realizó con exito, el cuarto ha sido marcado con detalles.',
+                    icon: 'warning',
                     confirmButtonText: 'OK'
                 });
                 $scope.findRoom();
@@ -463,6 +463,80 @@ app.controller('ROOMS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
             Swal.fire({
                 title: 'Error...',
                 text: 'No se pudo realizar la operación',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            $scope.loader = false;
+        });
+    }
+
+    $scope.getIncidenceDetails = item => $scope.incidence = item;
+
+    $scope.resolveIncidence = async () => {
+        $scope.loader = true;
+        await $http({
+            url: `${API_URL}/api/incidence/status/${$scope.incidence.idIncidence}`,
+            method: 'PUT',
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                "Access-Control-Allow-Origin":"*"
+            }
+        }).then(async () => {
+            await $http({
+                url: `${API_URL}/api/incidence/room/${$scope.room.idRoom}`,
+                method: 'GET',
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                    "Access-Control-Allow-Origin":"*"
+                }
+            }).then(async ({data}) => {
+                let flag = data.data.filter(item => item.status === 0).length === 0;
+
+                await $http({
+                    url: `${API_URL}/api/room/status/${$scope.room.idRoom}`,
+                    method: 'PUT',
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                        "Access-Control-Allow-Origin":"*"
+                    },
+                    data: JSON.stringify({status: flag ? 3 : 4})
+                }).then(async ({data}) => {
+                    Swal.fire({
+                        title: 'Operación exitosa',
+                        text: `Se resolvió la incidencia${flag ? ', el cuarto se ha preaparado para revisión' : ', pero el cuarto aún cuenta con incidencias'}.`,
+                        icon: flag ? 'success' : 'warning',
+                        confirmButtonText: 'OK'
+                    });
+                    flag ? $scope.findRoom() : null;
+                    $scope.loader = false;
+                }).catch(err => {
+                    Swal.fire({
+                        title: 'Error...',
+                        text: 'No se pudo cambiar el estado del cuarto',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                    $scope.loader = false;
+                });
+            }).catch(err => {
+                Swal.fire({
+                    title: 'Error...',
+                    text: 'No se pudo recuperar la información',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                $scope.loader = false;
+            });
+        }).catch(err => {
+            Swal.fire({
+                title: 'Error...',
+                text: 'No se pudo resolver la incidencia',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
