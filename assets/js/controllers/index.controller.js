@@ -1,5 +1,5 @@
 app.controller('INDEX_CONTROLLER', ['$rootScope', '$http', ($rootScope, $http) => {
-    const API_URL = 'http://192.168.55.51:8080';
+    const API_URL = 'http://52.1.80.209:8081/';
     (() => {
         let token = localStorage.getItem('token');
         if (!token) {
