@@ -1,5 +1,5 @@
 app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
-    const API_URL = 'http://192.168.55.51:8080';
+    const API_URL = 'http://localhost:8080';
     (() => {
         let token = localStorage.getItem('token');
         if (token) {
@@ -11,6 +11,7 @@ app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
         $scope.switchOperation();
     });
 
+    $scope.loader = false;
     $scope.loginButtonLoader = false;
     $scope.error = false;
     $scope.sessionActive = false;

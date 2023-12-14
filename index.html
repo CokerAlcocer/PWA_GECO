@@ -17,7 +17,7 @@
     <script src="./assets/js/angular.min.js"></script>
     <script src="./assets/js/app.js"></script>
     <script src="./assets/js/controllers/login.controller.js"></script>
-    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/pwa.js"></script>
     <!-- # Barra de navegación superior -->
     <div class="upperbar">
         <img src="./assets/img/logo-circle.PNG" style="height: 50px; width: 50px;" alt="Palcehold.co">
@@ -26,6 +26,9 @@
     <!-- # Barra de navegación superior -->
 
     <!-- # Contenido de la página -->
+    <div ng-if="loader" class="page-container d-flex align-items-center justify-content-center">
+        <div class="custom-loader"></div>
+    </div>
     <div class="page-container">
         <div class="row px-0 py-5 m-0 w-100" style="overflow-y: auto;">
             <!-- # Formulario de inicio de sesión -->

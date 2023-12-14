@@ -1,11 +1,36 @@
 app.controller('INDEX_CONTROLLER', ['$rootScope', '$http', ($rootScope, $http) => {
-    const API_URL = 'http://192.168.55.51:8080';
+    const API_URL = 'http://localhost:8080';
     (() => {
         let token = localStorage.getItem('token');
         if (!token) {
             window.location.replace('../../../index.html');
         }
     })();
+
+    const isOnlineBadge = () => document.getElementById('mode').style.display = navigator.onLine ? 'none' : 'block';
+    const isOnline = () => {
+        if (navigator.onLine) {
+            isOnlineBadge();
+            Swal.fire({
+                title: 'Modo ONLINE',
+                text: 'Ya cuentas con conexión a internet',
+                icon: 'success',
+                confirmButtonText: 'OK',
+            });
+        } else {
+            isOnlineBadge();
+            Swal.fire({
+                title: 'Modo OFFLINE',
+                text: 'No cuentas con conexión a internet',
+                icon: 'warning',
+                confirmButtonText: 'OK',
+            });
+        }
+    }
+
+    window.addEventListener('online', isOnline);
+    window.addEventListener('offline', isOnline);
+
     let isSideShowing = false;
     $rootScope.loader = true;
     $rootScope.hotel = {};
@@ -66,7 +91,10 @@ app.controller('INDEX_CONTROLLER', ['$rootScope', '$http', ($rootScope, $http) =
         element.style.backgroundColor = $rootScope.rootConfig.hotel.primaryColor;
     }
 
-    $rootScope.loadSidebarItem = page => page === $rootScope.rootConfig.page ? $rootScope.styles.active : $rootScope.styles.inactive;
+    $rootScope.loadSidebarItem = page => {
+        isOnlineBadge();
+        return page === $rootScope.rootConfig.page ? $rootScope.styles.active : $rootScope.styles.inactive;
+    };
 
     $rootScope.showSiteSettings = flag => {
         $rootScope.hotel = angular.copy($rootScope.rootConfig.hotel);
@@ -113,36 +141,14 @@ app.controller('INDEX_CONTROLLER', ['$rootScope', '$http', ($rootScope, $http) =
                 $rootScope.logout();
             });
             $rootScope.loader = false;
-        }).catch(() => {
+        }).catch(err => {
             Swal.fire({
                 title: 'Error...',
                 text: 'No se pudo realizar la operación',
                 icon: 'error',
                 confirmButtonText: 'OK',
-                onc
             });
             $rootScope.loader = false;
         });
     }
-
-    const isOnline = () => {
-        if (navigator.onLine) {
-            Swal.fire({
-                title: 'Cambio de estado',
-                text: 'Actualmente se encuentra en modo ONLINE',
-                icon: 'info',
-                confirmButtonText: 'OK',
-            });
-        } else {
-            Swal.fire({
-                title: 'Cambio de estado',
-                text: 'Actualmente se encuentra en modo OFFLINE',
-                icon: 'info',
-                confirmButtonText: 'OK',
-            });
-        }
-    }
-    
-    window.addEventListener('online', isOnline());
-    window.addEventListener('offline', isOnline());
 }]);
