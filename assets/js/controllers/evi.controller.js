@@ -1,5 +1,5 @@
 app.controller('EVALUATION_ITEMS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $http, $rootScope) => {
-    const API_URL = 'http://52.1.80.209:8081/';
+    const API_URL = 'http://52.1.80.209:8081';
     $scope.loader = true;
     $scope.evisList = [];
     $scope.evisListShowed = [];
