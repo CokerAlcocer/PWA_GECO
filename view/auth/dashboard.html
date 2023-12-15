@@ -3,7 +3,7 @@
         <div class="custom-loader"></div>
     </div>
     <div ng-if="!loader">
-        <h3 class="fw-normal">Panel de control - resumen</h3>
+        <h3 class="fw-normal">Panel de control</h3>
         <div class="col-12 mt-3" ng-if="roomListShowed.length === 0 || roomListShowed === undefined">
             <diV ng-if="rootConfig.rol.name === 'ROLE_GERENTE'" class="alert alert-warning">Aún no hay cuartos registrados, para visualizar el panel de control es necesario que cuente con cuartos registrados.</div>
             <div ng-if="rootConfig.rol.name === 'ROLE_RECEPCIONISTA'" class="alert alert-warning">Aún no hay cuartos registrados o todos los cuartos están en proceso de revisión, en cuanto se registren cuartos o que los cuartos existentes pasen la revisión, todos los registros aparecerán aqui.</div>
