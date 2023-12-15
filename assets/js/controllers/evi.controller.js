@@ -12,8 +12,7 @@ app.controller('EVALUATION_ITEMS_CONTROLLER', ['$scope', '$http', '$rootScope', 
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`,
-                "Access-Control-Allow-Origin":"*"
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
             }
         }).then(({data}) => {
             $scope.evisList = data.data ? data.data : [];
@@ -40,8 +39,7 @@ app.controller('EVALUATION_ITEMS_CONTROLLER', ['$scope', '$http', '$rootScope', 
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`,
-                "Access-Control-Allow-Origin":"*"
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
             },
             data: JSON.stringify($scope.evi)
         }).then(({data}) => {
@@ -74,7 +72,6 @@ app.controller('EVALUATION_ITEMS_CONTROLLER', ['$scope', '$http', '$rootScope', 
                 "Accept": "application/json",
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${localStorage.getItem('token')}`,
-                "Access-Control-Allow-Origin":"*"
             },
             data: JSON.stringify($scope.evi)
         }).then(({data}) => {
