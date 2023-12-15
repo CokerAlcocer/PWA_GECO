@@ -50,13 +50,13 @@
                                         <span ng-if="loginForm.user.$error.pattern" class="error-info">Favor de colocar un correo válido</span>
                                     </div>
                                     <div class="col-12 form-group overlay">
-                                        <input type="password" id="password" name="password" ng-model="user.password" pattern="^(?=.*[A-Z])(?=.*[#._])(?=.*[0-9])[a-zA-Z#._0-9]{4,}$" required class="geco-input" autocomplete="off">
+                                        <input type="password" id="password" name="password" ng-model="user.password" pattern="^(?=.*[A-Z])(?=.*[#._])(?=.*[0-9])[a-zA-Z#._0-9]{8,}$" required class="geco-input" autocomplete="off">
                                         <label for="">Contraseña</label>
                                         <span ng-if="loginForm.password.$touched && (loginForm.password.$error.required) && !loginForm.password.$error.pattern" class="error-info">Este campo es obligatorio</span>
                                         <span ng-if="loginForm.password.$error.pattern" class="error-info">
                                             Favor de cumplir con el formato:
                                             <ul class="mb-0">
-                                                <li>Longitud mínima de 4 caracteres</li>
+                                                <li>Longitud mínima de 8 caracteres</li>
                                                 <li>Una mayúscula</li>
                                                 <li>Un numero</li>
                                                 <li>Un caracter especial (# _ .)</li>
