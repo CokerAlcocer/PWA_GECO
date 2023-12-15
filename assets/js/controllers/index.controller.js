@@ -16,6 +16,8 @@ app.controller('INDEX_CONTROLLER', ['$rootScope', '$http', ($rootScope, $http) =
                 text: 'Ya cuentas con conexión a internet',
                 icon: 'success',
                 confirmButtonText: 'OK',
+            }).then(() => {
+                location.reload();
             });
         } else {
             isOnlineBadge();

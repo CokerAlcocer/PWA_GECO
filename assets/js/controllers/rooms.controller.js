@@ -277,7 +277,7 @@ app.controller('ROOMS_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
                 }).then(({data}) => {
                     Swal.fire({
                         title: 'Operación exitosa',
-                        text: 'El gerente hará la reivisión correspondiente',
+                        text: navigator.onLine ? 'El gerente hará la reivisión correspondiente' : 'El cambio se quedó guardado en cache, conenctate a internet para realizar el cambio',
                         icon: 'success',
                         confirmButtonText: 'OK'
                     });

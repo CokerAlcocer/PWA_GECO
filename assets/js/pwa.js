@@ -1,6 +1,12 @@
 
-if (navigator.serviceWorker) {
-    navigator.serviceWorker.register('/sw.js');
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+        .then(registration => {
+            console.log('Service Worker registrado con éxito');
+        })
+        .catch(error => {
+            console.error('Error durante el registro del Service Worker');
+        });
 }
 
 const isOnline = () => {

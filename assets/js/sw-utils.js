@@ -3,7 +3,6 @@ const updateDynamicCache = (name, req, res) => {
     if(res.ok) {
         return caches.open(name).then(cache => {
             cache.put(req, res.clone());
-            console.log(res.clone());
             return res.clone();
         });
     } else {
@@ -16,12 +15,17 @@ const apiManager = (name, req) => {
         return fetch(req);
     }
 
-    if(req.clone().method === 'POST') {
-        
+    if(req.clone().method === 'PUT' && req.url.includes('/api/room/status')) {
+        if(self.registration.sync && !navigator.onLine) {
+            return req.clone().text().then(body => {
+                return saveOfflineRequest(body, req.url);
+            });
+        } else {
+            return fetch(req);
+        }
     }
 
     return fetch(req).then(response => {
-        console.log(response);
         if(response.ok) {
             updateDynamicCache(name, req, response.clone());
             return response.clone();

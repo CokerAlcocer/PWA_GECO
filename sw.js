@@ -1,4 +1,6 @@
-importScripts('/assets/js/sw-utils.js');
+importScripts('https://cdn.jsdelivr.net/npm/pouchdb@8.0.1/dist/pouchdb.min.js');
+importScripts('./assets/js/db-utils.js');
+importScripts('./assets/js/sw-utils.js');
 
 const INMUTABLE_CACHE = 'gecoinmutablev1';
 const STATIC_CACHE = 'gecostaticv1';
@@ -81,4 +83,11 @@ self.addEventListener('fetch', e => {
     }
 
     e.respondWith(response);
+});
+
+self.addEventListener('sync', e => {
+    console.log('SYNC-EVENT: ' + e.tag);
+    if(e.tag == 'geco-offline') {
+        e.waitUntil(doOfflineRequestsSync());
+    }
 });
