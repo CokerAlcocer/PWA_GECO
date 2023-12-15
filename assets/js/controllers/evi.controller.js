@@ -114,8 +114,7 @@ app.controller('EVALUATION_ITEMS_CONTROLLER', ['$scope', '$http', '$rootScope', 
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`,
-                "Access-Control-Allow-Origin":"*"
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
             }
         }).then(() => {
             Swal.fire({
