@@ -1,9 +1,3 @@
-app.config(['$httpProvider', function ($httpProvider) {
-    $httpProvider.defaults.withCredentials = true;
-    $httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-    $httpProvider.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
-    $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = 'Content-Type';
-}]);
 app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
     const API_URL = 'http://52.1.80.209:8081';
     (() => {
@@ -33,8 +27,8 @@ app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
     $scope.form = true;
     $scope.changeForm = () => {
         $scope.form = !$scope.form;
-        document.title = `GECO | ${$scope.form ? 'Inicio de sesión' : 'Formulario de registro'}`;
-    } 
+        document.title = `GECO | ${$scope.form ? 'Inicio de sesión' : 'Formulario de registro'}`;
+    }
 
     const login = async () => {
         $scope.loginButtonLoader = true;
@@ -44,8 +38,7 @@ app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
             method: 'POST',
             headers: {
                 "Accept": "application/json",
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin":"*"
+                "Content-Type": "application/json"
             },
             data: JSON.stringify($scope.user)
         }).then(({data}) => {
@@ -88,8 +81,7 @@ app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
             url: `${API_URL}/api/image-upload/hotel`,
             method: 'POST',
             transformRequest: angular.identity,
-            headers: {"Content-Type": undefined,
-            "Access-Control-Allow-Origin":"*"},
+            headers: {"Content-Type": undefined},
             data: formData
         }).then(async ({data}) => {
             $scope.user.idHotel.imageUrl = data.imageUrl;
@@ -98,8 +90,7 @@ app.controller('LOGIN_CONTROLLER', ['$scope', '$http', ($scope, $http) => {
                 method: 'POST',
                 headers: {
                     "Accept": "application/json",
-                    "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin":"*"
+                    "Content-Type": "application/json"
                 },
                 data: JSON.stringify($scope.user)
             }).then(() => {

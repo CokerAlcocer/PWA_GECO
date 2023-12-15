@@ -16,8 +16,7 @@ app.controller('TYPES_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`,
-                "Access-Control-Allow-Origin":"*"
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
             }
         }).then(({data}) => {
             $scope.typeList = data.data ? data.data : [];
@@ -46,8 +45,7 @@ app.controller('TYPES_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`,
-                "Access-Control-Allow-Origin":"*"
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
             }
         }).then(({data}) => $scope.eiList = data.data ? data.data : []).catch(() => console.log('Error al recuperar la información'));
     }
@@ -62,8 +60,7 @@ app.controller('TYPES_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`,
-                "Access-Control-Allow-Origin":"*"
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
             },
             data: JSON.stringify($scope.type)
         }).then(({data}) => {
@@ -95,8 +92,7 @@ app.controller('TYPES_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $h
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem('token')}`,
-                "Access-Control-Allow-Origin":"*"
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
             },
             data: JSON.stringify($scope.type)
         }).then(({data}) => {
