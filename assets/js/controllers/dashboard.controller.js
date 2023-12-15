@@ -1,5 +1,5 @@
 app.controller('DASHBOARD_CONTROLLER', ['$scope', '$http', '$rootScope', ($scope, $http, $rootScope) => {
-    const API_URL = 'http://localhost:8080';
+    const API_URL = 'http://52.1.80.209:8081';
     $scope.roomList = [];
     $scope.roomListShowed = [];
     $scope.counts = {};
